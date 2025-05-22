@@ -203,7 +203,7 @@ Ce module est distribué sous licence **LGPL-3.0** (compatible avec Odoo).
 
 - **Issues GitHub :** Questions techniques et bugs
 - **Odoo Community :** Discussions sur le forum Odoo
-- **Email professionnel :** [Votre email si souhaité]
+- **Email professionnel :** [dibi.kavola@gmail.com]
 
 ## 🎯 Mission
 
