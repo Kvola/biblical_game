@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="biblical_game_settings_form_view" model="ir.ui.view">
+            <field name="name">biblical.game.settings.form</field>
+            <field name="model">biblical.game.settings</field>
+            <field name="arch" type="xml">
+                <form string="Paramètres">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Titre" required="1"/>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="active" widget="boolean_button"/>
+                            <field name="timer_duration"/>
+                        </group>
+                        <notebook>
+                            <page string="Livres">
+                                <group>
+                                    <field name="book_ids" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="biblical_game_settings_tree_view" model="ir.ui.view">
+            <field name="name">biblical.game.settings.tree</field>
+            <field name="model">biblical.game.settings</field>
+            <field name="arch" type="xml">
+                <tree string="Paramètres" editable="top">
+                    <field name="name"/>
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="timer_duration"/>
+                    <field name="active" widget="boolean_button"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="biblical_game_settings_search_view" model="ir.ui.view">
+            <field name="name">biblical.game.settings.search</field>
+            <field name="model">biblical.game.settings</field>
+            <field name="arch" type="xml">
+                <search string="Paramètres">
+                    <field name="name"/>
+                    <field name="book_ids" widget="many2many_tags"/>
+                    <field name="timer_duration"/>
+                    <field name="active" widget="boolean_button"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_biblical_game_settings" model="ir.actions.act_window">
+            <field name="name">Paramètres</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">biblical.game.settings</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Cliquez sur Nouveau pour créer un nouveau paramètres. Tous les paramètres actifs sont pris en compte.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

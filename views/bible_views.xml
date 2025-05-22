@@ -1,0 +1,58 @@
+<odoo>
+    <record id="view_book_tree" model="ir.ui.view">
+        <field name="name">biblical.book.tree</field>
+        <field name="model">biblical.game.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="book_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_chapter_tree" model="ir.ui.view">
+        <field name="name">biblical.chapter.tree</field>
+        <field name="model">biblical.game.chapter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="chapter_number"/>
+                <field name="book_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_verse_tree" model="ir.ui.view">
+        <field name="name">biblical.verse.tree</field>
+        <field name="model">biblical.game.verse</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="verse_number"/>
+                <field name="text"/>
+                <field name="chapter_id"/>
+            </tree>
+        </field>
+    </record>
+
+     <!-- Action pour les Livres -->
+    <record id="action_biblical_book_tree" model="ir.actions.act_window">
+        <field name="name">Livres</field>
+        <field name="res_model">biblical.game.book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action pour les Chapitres -->
+    <record id="action_biblical_chapter_tree" model="ir.actions.act_window">
+        <field name="name">Chapitres</field>
+        <field name="res_model">biblical.game.chapter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Action pour les Versets -->
+    <record id="action_biblical_verse_tree" model="ir.actions.act_window">
+        <field name="name">Versets</field>
+        <field name="res_model">biblical.game.verse</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

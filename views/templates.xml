@@ -1,0 +1,190 @@
+<odoo>
+    <record id="menu_biblical_game" model="website.menu">
+        <field name="name">Jeu biblique</field>
+        <field name="url">/start_biblical_game</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">50</field>
+    </record>
+    <record id="menu_biblical_contest_game" model="website.menu">
+        <field name="name">Concours biblique EBNG</field>
+        <field name="url">/start_biblical_contest_game</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">50</field>
+    </record>
+    <template id="my_biblical_game_main" name="Jeu biblique solitaire">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <!-- Titre du jeu -->
+                <div class="text-center mb-4">
+                    <h1 class="text-primary display-4 font-weight-bold">🎮 Jeu Biblique 🎮</h1>
+                    <p class="lead text-muted">Testez vos connaissances avec ce jeu passionnant !</p>
+                </div>
+
+                <!-- Sélecteur de paramètres -->
+                <div id="general_params" class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Paramètres du Jeu</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="settings_dropdown" class="font-weight-bold">Choisissez un paramètre :</label>
+                            <select id="settings_dropdown" class="form-control">
+                                <option value="">-- Sélectionnez un paramètre --</option>
+                            </select>
+                        </div>
+                        <button id="load_game_params" class="btn btn-secondary mt-3" onclick="loadSoloGameSettings()">Charger les paramètres</button>
+                        <button id="start_game_button" style="display:none;" class="btn btn-primary mt-3" onclick="loadReferenceQuestion()">Commencer le jeu</button>
+                    </div>
+                </div>
+
+                <!-- Zone des manches et score -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-4">
+                        <div class="card shadow-lg border-primary text-center">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold text-primary">Manche Actuelle</h5>
+                                <h2 id="current_stage" class="display-4">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="trophy_celebration" class="d-none text-center">
+                        <img src="/biblical_game/static/src/img/trophy.png" alt="Trophée" style="width: 200px;" />
+                        <h1 class="text-success">🏆 Félicitations !</h1>
+                        <p>Vous avez terminé toutes les manches et remporté le trophée final !</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-lg border-success text-center">
+                            <div class="card-body">
+                                <p>Points requis pour une médaille pendant cette manche</p>
+                                <ul class="no-bullets">
+                                    <li>🥉 Bronze : <span id="bronze_threshold">20</span>pts</li>
+                                    <li>🥈 Argent : <span id="silver_threshold">50</span>pts</li>
+                                    <li>🏅 Or : <span id="gold_threshold">100</span>pts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-lg border-success text-center">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold text-success">Score</h5>
+                                <h2 id="player_score" class="display-4">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Médailles -->
+                <div class="text-center mb-4">
+                    <h3>🎖️ Médailles Obtenues</h3>
+                    <span id="current_medal" class="badge badge-secondary p-3">Aucune</span>
+                </div>
+
+                <!-- Section du compteur -->
+                <div id="timer_section" class="text-center mb-4">
+                    <h5 class="text-muted">Temps restant :</h5>
+                    <div id="timer_display" class="d-inline-block px-3 py-2 rounded bg-light shadow-sm">
+                        <span id="timer_count" class="text-danger font-weight-bold">30</span> secondes
+                    </div>
+                    <div class="progress mt-2">
+                        <div id="timer_progress" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30"></div>
+                    </div>
+                </div>
+
+                <!-- Section principale du jeu -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0 text-center">Quelle est la référence de ce verset ?</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Affichage du verset -->
+                        <blockquote id="verse_text" class="blockquote text-center mb-4">
+                            <p class="mb-0 text-secondary">Chargement du verset...</p>
+                        </blockquote>
+
+                        <!-- Options de réponse -->
+                        <div id="response_options" class="row justify-content-center">
+                            <!-- Les boutons seront générés dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton Pause -->
+                <div class="mt-4" id="button_pause">
+                    <button id="pause_button" class="floating-btn" onclick="togglePause()">⏸️</button>
+                </div>
+
+                <!-- Overlay de pause -->
+                <div id="pause_overlay" class="d-none">
+                    <div class="overlay-content">
+                        <img src="/biblical_game/static/src/sounds/blue-pause.svg" alt="Pause" style="width: 200px; margin-bottom: 20px;"/>
+                        <h1>⏸️ Pause</h1>
+                        <p>Reprenez votre souffle et cliquez sur "Reprendre".</p>
+                        <button class="btn btn-primary btn-lg" onclick="togglePause()">Reprendre le jeu</button>
+                    </div>
+                </div>
+
+                <!-- Message de feedback -->
+                <div id="feedback_message" class="text-center mt-4 d-none">
+                    <h4 id="feedback_text"></h4>
+                </div>
+                <div id="correct_answer" class="text-center mt-4 d-none">
+                    <h4 id="correct_text" class="mt-2"></h4>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="second_biblical_contest_game_main" name="Concours biblique EBNG">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h1 class="text-center text-primary mb-4">Jouer au Jeu Biblique</h1>
+
+                <!-- Sélecteur de paramètres -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Paramètres du Jeu</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="game_settings" class="font-weight-bold">Choisissez un paramètre :</label>
+                            <select id="game_settings" class="form-control">
+                                <option value="">-- Sélectionnez un paramètre --</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary mt-3" onclick="loadGameSettings()">Recharger les paramètres</button>
+                    </div>
+                </div>
+
+                <!-- Zone d'affichage des versets -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">Trouver la référence du verset</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <blockquote id="verse_text" class="blockquote">
+                            <p class="mb-0 text-secondary">Appuyez sur le bouton pour afficher un verset.</p>
+                        </blockquote>
+                        <p>
+                            <label>
+                                <input type="checkbox" id="toggleParagraph" onclick="displayreference()"/> Afficher la référence
+                            </label>
+                        </p>
+                        <footer id="verse_ref" style="display:none;" class="blockquote-footer text-muted"></footer>
+                        <button class="btn btn-primary mt-3" id="play_button" onclick="fetchVerse()">
+                            <i class="fa fa-play"></i> Cliquez et Jouez
+                        </button>
+                        <span id="loading_spinner" class="spinner-border spinner-border-sm d-none text-primary" role="status"></span>
+                    </div>
+                </div>
+
+                <!-- Compteur avec message -->
+                <div class="text-center">
+                    <p class="font-weight-bold">
+                        Temps restant : <span id="timer_count" class="text-primary">30</span> secondes
+                    </p>
+                    <p id="time_up_message" class="text-danger font-weight-bold d-none">Le temps est écoulé ! Cliquez à nouveau pour jouer.</p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

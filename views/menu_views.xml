@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Menu principal -->
+    <menuitem id="menu_biblical_game_root" name="Biblical Game" sequence="10" />
+        <!-- Sous-menu Paramètres -->
+        <menuitem id="menu_biblical_game_settings" name="Paramètres" parent="menu_biblical_game_root"  sequence="10" action="action_biblical_game_settings"/>
+        <!-- Menu pour accéder aux Game Stages -->
+        <menuitem id="menu_biblical_game_stage_root" name="Stages du Jeu" parent="menu_biblical_game_root" action="action_biblical_game_stage"/>
+        <!-- Menu pour accéder aux Game Stages -->
+        <menuitem id="menu_setting_root" name="Configuration" parent="menu_biblical_game_root"/>
+            <!-- Sous-menu Livres -->
+            <menuitem id="menu_biblical_game_books" name="Livres" parent="menu_setting_root" sequence="20" action="action_biblical_book_tree" />
+            <!-- Sous-menu Chapitres -->
+            <menuitem id="menu_biblical_game_chapters" name="Chapitres" parent="menu_setting_root" sequence="30" action="action_biblical_chapter_tree" />
+            <!-- Sous-menu Versets -->
+            <menuitem id="menu_biblical_game_verses" name="Versets" parent="menu_setting_root" sequence="40" action="action_biblical_verse_tree" />
+</odoo>

@@ -1,0 +1,51 @@
+<odoo>
+    <!-- Vue Tree (Liste) -->
+    <record id="view_biblical_game_stage_tree" model="ir.ui.view">
+        <field name="name">biblical.game.stage.tree</field>
+        <field name="model">biblical.game.stage</field>
+        <field name="arch" type="xml">
+            <tree string="Game Stages">
+                <field name="name" string="Nom de la Manche"/>
+                <field name="level" string="Niveau" />
+                <field name="bronze_threshold" string="Seuil Bronze 🥉" />
+                <field name="silver_threshold" string="Seuil Argent 🥈" />
+                <field name="gold_threshold" string="Seuil Or 🏅" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Form (Formulaire) -->
+    <record id="view_biblical_game_stage_form" model="ir.ui.view">
+        <field name="name">biblical.game.stage.form</field>
+        <field name="model">biblical.game.stage</field>
+        <field name="arch" type="xml">
+            <form string="Game Stage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Nom de la Manche"/>
+                            <field name="level" string="Niveau"/>
+                        </group>
+                        <group>
+                            <field name="bronze_threshold" string="Seuil Bronze 🥉"/>
+                            <field name="silver_threshold" string="Seuil Argent 🥈"/>
+                            <field name="gold_threshold" string="Seuil Or 🏅"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour accéder au modèle -->
+    <record id="action_biblical_game_stage" model="ir.actions.act_window">
+        <field name="name">Game Stages</field>
+        <field name="res_model">biblical.game.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez et configurez les manches pour votre jeu ici.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,358 @@
+/* Carte */
+.card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Texte du verset */
+#verse_text {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #343a40;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+/* Boutons de réponse */
+#response_options button {
+    font-size: 1rem;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+#response_options button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Feedback */
+#feedback_message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: opacity 0.5s ease;
+    animation: pop 0.5s ease-in-out;
+}
+
+#feedback_message.correct {
+    color: #28a745;
+}
+
+#feedback_message.incorrect {
+    color: #dc3545;
+}
+
+/* Conteneur du score */
+#score_container {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#score_display {
+    font-size: 2rem;
+    font-family: 'Arial', sans-serif;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    animation: pulse 1s infinite ease-in-out;
+}
+
+/* Animation Pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        background-color: #f8f9fa;
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: #e9ecef;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #f8f9fa;
+    }
+}
+
+/* Affichage des points */
+#score_value {
+    color: #007bff;
+    font-size: 2.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+#score_value.increment {
+    animation: bounce 0.5s;
+    color: #28a745;
+}
+
+#score_value.decrement {
+    animation: shake 0.5s;
+    color: #dc3545;
+}
+
+/* Animation Bounce (pour l'incrémentation) */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation Shake (pour la décrémentation) */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+.progress {
+    height: 20px;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    transition: width 1s linear;
+}
+
+
+#medal_section {
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
+
+#medal_image {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#medal_image.awarded {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+#settings_dropdown {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#settings_dropdown:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+#start_game_button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* Animation de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.8s ease-in-out;
+    border-radius: 15px;
+}
+
+.badge {
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #6c757d, #adb5bd);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: pulse 1.5s infinite;
+}
+
+/* Animation de pulse pour la médaille */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.medal-won {
+    animation: shine 1.5s ease-in-out;
+    color: gold;
+}
+
+@keyframes shine {
+    0% {
+        text-shadow: 0 0 5px gold, 0 0 10px gold;
+    }
+    50% {
+        text-shadow: 0 0 20px gold, 0 0 40px yellow;
+    }
+    100% {
+        text-shadow: 0 0 5px gold, 0 0 10px gold;
+    }
+}
+
+.medal-bronze {
+    color: #cd7f32;
+}
+
+.medal-silver {
+    color: #c0c0c0;
+}
+
+.medal-gold {
+    color: #ffd700;
+}
+
+ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+  }
+
+#pause_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fond sombre avec opacité */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    backdrop-filter: blur(5px); /* Effet de flou */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out; /* Animation douce */
+}
+
+#pause_overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#pause_button {
+    font-size: 1.2rem;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ff8a00, #e52e71); /* Gradient dynamique */
+    color: white;
+    padding: 10px 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#pause_button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#trophy_celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+    z-index: 1000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

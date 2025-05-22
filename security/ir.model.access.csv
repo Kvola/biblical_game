@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_biblical_book,biblical.book.access,model_biblical_game_book,,1,0,0,0
+access_biblical_chapter,biblical.chapter.access,model_biblical_game_chapter,,1,0,0,0
+access_biblical_verse,biblical.verse.access,model_biblical_game_verse,,1,0,0,0
+access_biblical_game_settings,biblical.game.settings,model_biblical_game_settings,,1,1,1,1
+access_biblical_game_stage,biblical.game.stage,model_biblical_game_stage,,1,1,1,1
+access_biblical_game_session,biblical.game.session,model_biblical_game_session,,1,1,1,1
