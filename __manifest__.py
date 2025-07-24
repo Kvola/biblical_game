@@ -9,7 +9,6 @@
         "website",
         "mail",
         "utm",
-        "generic_user_guide",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -19,9 +18,13 @@
         "views/templates.xml",
         "views/user_guide_templates.xml",
         "views/biblical_game_session_views.xml",
+        "views/user_guide_templates.xml",
         "views/menu_views.xml",
     ],
     "assets": {
+        "web.assets_backend": [
+            "biblical_game/static/src/js/user_menu.js",
+        ],
         "web.assets_frontend": [
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
             "biblical_game/static/src/css/biblical_game.css",

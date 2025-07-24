@@ -10,6 +10,12 @@ _logger = logging.getLogger(__name__)
 class BiblicalGameController(http.Controller):
     
     # ===== ROUTES PRINCIPALES =====
+    @http.route('/web/user-guide', type='http', auth='user', website=False)
+    def user_guide(self, **kwargs):
+        """Main user guide page"""
+        return request.render('custom_novago.biblical_game_guide_template', {
+            'base_url': request.httprequest.url_root
+        })
 
     @http.route("/start_biblical_game", auth="public", type="http", website=True, csrf=False)
     def start_biblical_game(self):

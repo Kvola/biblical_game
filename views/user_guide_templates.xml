@@ -1,315 +1,1049 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="menu_biblical_game" model="website.menu">
+        <record id="menu_biblical_game_user_guide_web" model="website.menu">
             <field name="name">Guide utilisateur</field>
-            <field name="url">/user-guide</field>
-            <field name="parent_id" ref="website.main_menu"/>
-            <field name="sequence">50</field>
+            <field name="url">/web/user-guide</field>
+            <field name="parent_id" ref="website.main_menu" />
+            <field name="sequence">70</field>
         </record>
-        <!-- Template principal du guide utilisateur -->
-        <template id="user_guide_template" name="Guide Utilisateur">
-            <t t-call="website.layout">
-                <div id="wrap" class="oe_structure oe_empty">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="text-center mb-4">Guide Utilisateur - Jeu Biblique</h1>
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <!-- Menu de navigation -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Navigation</h5>
+        <!-- ==================== -->
+        <!-- MAIN TEMPLATE (HOME) -->
+        <!-- ==================== -->
+        <template id="biblical_game_guide_template" name="Biblical Game User Guide Template">
+            <t t-call="web.basic_layout">
+                <!-- Main Container -->
+                <div class="container-fluid bg-light" style="min-height: 100vh;">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" 
+                             style="background-color: #2c3e50; min-height: 100vh;">
+                            <div class="position-sticky pt-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-white">📖 BIBLICAL GAME</h4>
+                                    <p class="text-muted">Guide Utilisateur</p>
+                                </div>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link active text-white bg-dark" href="/web/biblical-game-guide">
+                                            <i class="fa fa-home me-2"></i>Accueil
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/installation">
+                                            <i class="fa fa-download me-2"></i>Installation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/bible-management">
+                                            <i class="fa fa-book me-2"></i>Gestion Bible
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/game-stages">
+                                            <i class="fa fa-trophy me-2"></i>Étapes du Jeu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/configuration">
+                                            <i class="fa fa-cog me-2"></i>Configuration
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                            <!-- Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">📖 Guide Utilisateur Biblical Game</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <div class="btn-group me-2">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fa fa-print me-1"></i>Imprimer
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fa fa-download me-1"></i>PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Welcome Alert -->
+                            <div class="alert alert-info mb-4">
+                                <h4 class="alert-heading"><i class="fa fa-info-circle me-2"></i>Bienvenue dans Biblical Game</h4>
+                                <p class="mb-0">Découvrez un module Odoo unique qui transforme l'apprentissage biblique basé sur la traduction Louis Segond en une expérience ludique et interactive.</p>
+                            </div>
+
+                            <!-- Features Grid -->
+                            <div class="row">
+                                <!-- Installation -->
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="card h-100 border-start border-start-4 border-primary">
+                                        <div class="card-body text-center">
+                                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                                 style="width: 70px; height: 70px;">
+                                                <i class="fa fa-download fa-2x"></i>
                                             </div>
-                                            <div class="card-body">
-                                                <ul class="list-unstyled">
-                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
-                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
-                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
-                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
-                                                </ul>
-                                            </div>
+                                            <h5 class="card-title">Installation</h5>
+                                            <p class="card-text small">Guide complet pour installer et configurer le module Biblical Game dans votre instance Odoo.</p>
+                                            <a href="/web/biblical-game-guide/installation" class="btn btn-sm btn-primary stretched-link">
+                                                Voir guide <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-9">
-                                        <!-- Contenu principal -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2>Bienvenue dans le Guide Utilisateur</h2>
-                                                <p>Ce guide vous aidera à utiliser efficacement le module Jeu Biblique.</p>
-                                                
-                                                <h3>Sections disponibles :</h3>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="card mb-3">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Premiers pas</h5>
-                                                                <p class="card-text">Découvrez comment commencer à utiliser le jeu biblique.</p>
-                                                                <a href="/user-guide/getting-started" class="btn btn-primary">Commencer</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="card mb-3">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Règles du jeu</h5>
-                                                                <p class="card-text">Apprenez les règles et mécaniques du jeu.</p>
-                                                                <a href="/user-guide/game-rules" class="btn btn-primary">Voir les règles</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="card mb-3">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">Configuration</h5>
-                                                                <p class="card-text">Configurez les paramètres du jeu selon vos besoins.</p>
-                                                                <a href="/user-guide/configuration" class="btn btn-primary">Configurer</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                </div>
+
+                                <!-- Bible Management -->
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="card h-100 border-start border-start-4 border-success">
+                                        <div class="card-body text-center">
+                                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                                 style="width: 70px; height: 70px;">
+                                                <i class="fa fa-book fa-2x"></i>
                                             </div>
+                                            <h5 class="card-title">Gestion Bible</h5>
+                                            <p class="card-text small">Administration des versets et références bibliques Louis Segond pour enrichir votre jeu.</p>
+                                            <a href="/web/biblical-game-guide/bible-management" class="btn btn-sm btn-success stretched-link">
+                                                Voir guide <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Game Stages -->
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="card h-100 border-start border-start-4 border-warning">
+                                        <div class="card-body text-center">
+                                            <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                                 style="width: 70px; height: 70px;">
+                                                <i class="fa fa-trophy fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title">Étapes du Jeu</h5>
+                                            <p class="card-text small">Configuration des niveaux, défis et système de progression pour une expérience enrichissante.</p>
+                                            <a href="/web/biblical-game-guide/game-stages" class="btn btn-sm btn-warning text-white stretched-link">
+                                                Voir guide <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Configuration -->
+                                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                    <div class="card h-100 border-start border-start-4 border-info">
+                                        <div class="card-body text-center">
+                                            <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                                 style="width: 70px; height: 70px;">
+                                                <i class="fa fa-cog fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title">Configuration</h5>
+                                            <p class="card-text small">Personnalisation de l'expérience utilisateur avec paramètres avancés et thématiques.</p>
+                                            <a href="/web/biblical-game-guide/configuration" class="btn btn-sm btn-info text-white stretched-link">
+                                                Voir guide <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </template>
 
-        <!-- Template Premiers pas -->
-        <template id="getting_started_template" name="Premiers pas">
-            <t t-call="website.layout">
-                <div id="wrap" class="oe_structure oe_empty">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="text-center mb-4">Premiers pas</h1>
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <!-- Menu de navigation -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Navigation</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="list-unstyled">
-                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
-                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0 font-weight-bold">Premiers pas</a></li>
-                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
-                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
-                                                </ul>
-                                            </div>
+                            <!-- Technical Info -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="fa fa-code me-2"></i>Informations techniques</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">Technologies utilisées</h6>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>Odoo 16+ (Python/XML/JavaScript)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>HTML5, CSS3, JavaScript ES6
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>PostgreSQL via Odoo ORM
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="col-md-9">
-                                        <!-- Contenu -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2>Comment commencer</h2>
-                                                
-                                                <h3>1. Configuration initiale</h3>
-                                                <p>Avant de commencer à jouer, vous devez configurer les éléments de base :</p>
-                                                <ul>
-                                                    <li>Accédez au menu <strong>Configuration → Paramètres du Jeu</strong></li>
-                                                    <li>Définissez les paramètres généraux du jeu</li>
-                                                    <li>Configurez les niveaux de difficulté</li>
-                                                </ul>
-                                                
-                                                <h3>2. Données bibliques</h3>
-                                                <p>Assurez-vous que les données bibliques sont correctement importées :</p>
-                                                <ul>
-                                                    <li>Vérifiez la présence des livres dans <strong>Données Bibliques → Livres</strong></li>
-                                                    <li>Contrôlez les chapitres et versets associés</li>
-                                                </ul>
-                                                
-                                                <h3>3. Premier jeu</h3>
-                                                <p>Une fois la configuration terminée :</p>
-                                                <ol>
-                                                    <li>Créez une nouvelle partie depuis le menu principal</li>
-                                                    <li>Sélectionnez le niveau de difficulté</li>
-                                                    <li>Commencez à jouer !</li>
-                                                </ol>
-                                                
-                                                <div class="alert alert-info">
-                                                    <strong>Conseil :</strong> Commencez par le niveau facile pour vous familiariser avec le jeu.
-                                                </div>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">Dépendances Odoo</h6>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-info me-2"></i>base - Module de base Odoo
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-info me-2"></i>website - Interface web publique
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-info me-2"></i>mail - Système de messagerie
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-info me-2"></i>utm - Suivi des campagnes
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </template>
 
-        <!-- Template Règles du jeu -->
-        <template id="game_rules_template" name="Règles du jeu">
-            <t t-call="website.layout">
-                <div id="wrap" class="oe_structure oe_empty">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="text-center mb-4">Règles du jeu</h1>
-                                
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <!-- Menu de navigation -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Navigation</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="list-unstyled">
-                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
-                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
-                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0 font-weight-bold">Règles du jeu</a></li>
-                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
-                                                </ul>
-                                            </div>
+                            <!-- Quick Links -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="fa fa-link me-2"></i>Liens rapides</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item border-0">
+                                                    <a href="https://github.com/Kvola/biblical_game" class="text-decoration-none" target="_blank">
+                                                        <i class="fa fa-code-branch text-dark me-2"></i>Code source GitHub
+                                                    </a>
+                                                </li>
+                                                <li class="list-group-item border-0">
+                                                    <a href="/biblical-game" class="text-decoration-none">
+                                                        <i class="fa fa-gamepad text-primary me-2"></i>Accéder au jeu
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="col-md-9">
-                                        <!-- Contenu -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2>Comment jouer</h2>
-                                                
-                                                <h3>Objectif du jeu</h3>
-                                                <p>Le but est de répondre correctement aux questions bibliques pour progresser dans les niveaux.</p>
-                                                
-                                                <h3>Système de points</h3>
-                                                <ul>
-                                                    <li>Bonne réponse : +10 points</li>
-                                                    <li>Mauvaise réponse : -5 points</li>
-                                                    <li>Bonus de vitesse : +5 points si réponse en moins de 10 secondes</li>
-                                                </ul>
-                                                
-                                                <h3>Niveaux de difficulté</h3>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="card border-success mb-3">
-                                                            <div class="card-header bg-success text-white">Facile</div>
-                                                            <div class="card-body">
-                                                                <p>Questions de base sur les personnages et événements bibliques majeurs.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="card border-warning mb-3">
-                                                            <div class="card-header bg-warning">Moyen</div>
-                                                            <div class="card-body">
-                                                                <p>Questions plus détaillées nécessitant une connaissance approfondie.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="card border-danger mb-3">
-                                                            <div class="card-header bg-danger text-white">Difficile</div>
-                                                            <div class="card-body">
-                                                                <p>Questions complexes sur les détails et références croisées.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <h3>Progression</h3>
-                                                <p>Pour passer au niveau suivant, vous devez :</p>
-                                                <ol>
-                                                    <li>Atteindre le score minimum requis</li>
-                                                    <li>Répondre correctement à au moins 70% des questions</li>
-                                                    <li>Terminer le niveau dans le temps imparti</li>
-                                                </ol>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item border-0">
+                                                    <a href="https://github.com/Kvola/biblical_game/issues" class="text-decoration-none" target="_blank">
+                                                        <i class="fa fa-bug text-danger me-2"></i>Signaler un bug
+                                                    </a>
+                                                </li>
+                                                <li class="list-group-item border-0">
+                                                    <a href="mailto:dibi.kavola@gmail.com" class="text-decoration-none">
+                                                        <i class="fa fa-envelope text-success me-2"></i>Contact développeur
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <!-- Biblical Quote -->
+                            <div class="card bg-light border-0">
+                                <div class="card-body text-center">
+                                    <blockquote class="blockquote mb-0">
+                                        <p class="mb-3 font-italic">"Que ce livre de la loi ne s'éloigne point de ta bouche; médite-le jour et nuit, pour agir fidèlement selon tout ce qui y est écrit; car c'est alors que tu auras du succès dans tes entreprises, c'est alors que tu réussiras."</p>
+                                        <footer class="blockquote-footer">
+                                            <cite title="Source">Josué 1:8 (Louis Segond)</cite>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </main>
                     </div>
                 </div>
+
+                <!-- Scroll to Top Button -->
+                <button type="button" class="btn btn-primary rounded-circle position-fixed shadow" 
+                        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 1000;"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+
+                <script>
+                    // Highlight active menu item
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentPath = window.location.pathname;
+                        const navLinks = document.querySelectorAll('.nav-link');
+                        
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === currentPath) {
+                                link.classList.add('bg-dark', 'active');
+                                link.classList.remove('text-white');
+                            } else {
+                                link.classList.remove('bg-dark', 'active');
+                                if (!link.classList.contains('text-white')) {
+                                    link.classList.add('text-white');
+                                }
+                            }
+                        });
+                        
+                        // Add animation to cards
+                        const cards = document.querySelectorAll('.card');
+                        cards.forEach((card, index) => {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            card.style.transition = 'all 0.5s ease';
+                            
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100 * index);
+                        });
+                    });
+                </script>
             </t>
         </template>
 
-        <!-- Template Configuration -->
-        <template id="configuration_template" name="Configuration">
-            <t t-call="website.layout">
-                <div id="wrap" class="oe_structure oe_empty">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 class="text-center mb-4">Configuration</h1>
-                                
+        <!-- =========================== -->
+        <!-- INSTALLATION TEMPLATE -->
+        <!-- =========================== -->
+        <template id="biblical_game_installation_template" name="Biblical Game Installation Guide">
+            <t t-call="web.basic_layout">
+                <div class="container-fluid bg-light" style="min-height: 100vh;">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" 
+                             style="background-color: #2c3e50; min-height: 100vh;">
+                            <div class="position-sticky pt-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-white">📖 BIBLICAL GAME</h4>
+                                    <p class="text-muted">Guide Utilisateur</p>
+                                </div>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide">
+                                            <i class="fa fa-home me-2"></i>Accueil
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link active text-white bg-dark" href="/web/biblical-game-guide/installation">
+                                            <i class="fa fa-download me-2"></i>Installation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/bible-management">
+                                            <i class="fa fa-book me-2"></i>Gestion Bible
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/game-stages">
+                                            <i class="fa fa-trophy me-2"></i>Étapes du Jeu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/configuration">
+                                            <i class="fa fa-cog me-2"></i>Configuration
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mb-4">
+                                <ol class="breadcrumb bg-white p-2 rounded shadow-sm">
+                                    <li class="breadcrumb-item"><a href="/web/biblical-game-guide">Accueil</a></li>
+                                    <li class="breadcrumb-item active">Installation</li>
+                                </ol>
+                            </nav>
+
+                            <!-- Page Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">🚀 Installation de Biblical Game</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-print me-1"></i>Imprimer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Prerequisites -->
+                            <div class="alert alert-info">
+                                <h5 class="alert-heading"><i class="fa fa-info-circle me-2"></i>Prérequis</h5>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <!-- Menu de navigation -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Navigation</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="list-unstyled">
-                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
-                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
-                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
-                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0 font-weight-bold">Configuration</a></li>
-                                                </ul>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <ul class="mb-0">
+                                            <li>Odoo 16.0 ou version supérieure</li>
+                                            <li>PostgreSQL 12+</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="mb-0">
+                                            <li>Python 3.8+</li>
+                                            <li>Accès administrateur à l'instance Odoo</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Installation Steps -->
+                            <div class="card mb-4 border-primary">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-primary me-2">1</span>Téléchargement du module</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Clonez le dépôt GitHub dans le répertoire addons de votre instance Odoo :</p>
+                                    <div class="bg-dark text-white p-3 rounded mb-3">
+                                        <code>
+                                            cd /path/to/odoo/addons<br/>
+                                            git clone https://github.com/Kvola/biblical_game.git
+                                        </code>
+                                    </div>
+                                    <div class="alert alert-warning">
+                                        <i class="fa fa-exclamation-triangle me-2"></i>
+                                        Assurez-vous que le répertoire biblical_game est bien placé dans le dossier addons d'Odoo.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 border-primary">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-primary me-2">2</span>Redémarrage du serveur</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Redémarrez votre serveur Odoo pour que le nouveau module soit détecté :</p>
+                                    <div class="bg-dark text-white p-3 rounded mb-3">
+                                        <code>
+                                            # Option 1: Service système<br/>
+                                            sudo systemctl restart odoo<br/><br/>
+                                            # Option 2: Mise à jour directe<br/>
+                                            ./odoo-bin -u biblical_game -d votre_base_de_donnees
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 border-primary">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-primary me-2">3</span>Activation du module</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Activez le module Biblical Game depuis l'interface d'administration Odoo :</p>
+                                    <ol class="list-group list-group-numbered mb-3">
+                                        <li class="list-group-item">Connectez-vous en tant qu'administrateur</li>
+                                        <li class="list-group-item">Accédez au menu <strong>Applications</strong></li>
+                                        <li class="list-group-item">Recherchez "Biblical Game" dans la barre de recherche</li>
+                                        <li class="list-group-item">Cliquez sur le bouton <strong>Installer</strong></li>
+                                    </ol>
+                                    <div class="alert alert-success">
+                                        <i class="fa fa-check-circle me-2"></i>
+                                        L'installation peut prendre quelques minutes selon votre configuration.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 border-primary">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-primary me-2">4</span>Configuration initiale</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Après l'installation, configurez les paramètres de base :</p>
+                                    <ol class="list-group list-group-numbered mb-3">
+                                        <li class="list-group-item">Accédez au menu <strong>Biblical Game > Configuration</strong></li>
+                                        <li class="list-group-item">Configurez les paramètres du jeu selon vos préférences</li>
+                                        <li class="list-group-item">Définissez les niveaux de difficulté</li>
+                                        <li class="list-group-item">Activez les thématiques souhaitées</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Architecture -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-white">
+                                    <h3 class="mb-0"><i class="fa fa-sitemap me-2"></i>Structure du module</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="bg-dark text-white p-3 rounded">
+                                        <code>
+                                            biblical_game/<br/>
+                                            ├── __manifest__.py              # Manifeste du module<br/>
+                                            ├── __init__.py                 # Initialisation Python<br/>
+                                            ├── models/                     # Modèles de données Odoo<br/>
+                                            │   ├── bible.py               # Modèle des données bibliques<br/>
+                                            │   ├── bible_settings.py     # Configuration du jeu<br/>
+                                            │   └── biblical_game_stage.py # Étapes/niveaux<br/>
+                                            ├── views/                     # Vues XML Odoo<br/>
+                                            ├── security/                  # Sécurité et droits d'accès<br/>
+                                            └── static/src/                # Ressources statiques
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Verification -->
+                            <div class="alert alert-success">
+                                <h5><i class="fa fa-check-circle me-2"></i>Vérification de l'installation</h5>
+                                <p>Pour vérifier que l'installation s'est déroulée correctement :</p>
+                                <ul class="mb-0">
+                                    <li>Le menu "Biblical Game" apparaît dans la barre de navigation</li>
+                                    <li>Vous pouvez accéder au jeu via l'URL : <code>votre-domaine.com/biblical-game</code></li>
+                                    <li>Les modèles de données sont créés dans la base</li>
+                                    <li>Les vues d'administration sont accessibles</li>
+                                </ul>
+                            </div>
+
+                            <!-- Troubleshooting -->
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3 class="mb-0"><i class="fa fa-wrench me-2"></i>Dépannage</h3>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="text-primary">Problèmes courants :</h6>
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item border-0 py-2">
+                                            <strong>Module non visible :</strong> Vérifiez le chemin d'installation et redémarrez Odoo
+                                        </li>
+                                        <li class="list-group-item border-0 py-2">
+                                            <strong>Erreur de dépendance :</strong> Assurez-vous que les modules base, website, mail, utm sont installés
+                                        </li>
+                                        <li class="list-group-item border-0 py-2">
+                                            <strong>Problème de permissions :</strong> Vérifiez les droits d'accès sur les fichiers du module
+                                        </li>
+                                    </ul>
+                                    <div class="alert alert-info">
+                                        <strong>Support :</strong> En cas de problème, consultez les <a href="https://github.com/Kvola/biblical_game/issues" target="_blank">issues GitHub</a> ou contactez le développeur.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+
+                <!-- Scroll to Top Button -->
+                <button type="button" class="btn btn-primary rounded-circle position-fixed shadow" 
+                        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 1000;"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentPath = window.location.pathname;
+                        const navLinks = document.querySelectorAll('.nav-link');
+                        
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === currentPath) {
+                                link.classList.add('bg-dark', 'active');
+                                link.classList.remove('text-white');
+                            } else {
+                                link.classList.remove('bg-dark', 'active');
+                                if (!link.classList.contains('text-white')) {
+                                    link.classList.add('text-white');
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </t>
+        </template>
+
+        <!-- ============================= -->
+        <!-- BIBLE MANAGEMENT TEMPLATE -->
+        <!-- ============================= -->
+        <template id="biblical_game_bible_management_template" name="Bible Management Guide">
+            <t t-call="web.basic_layout">
+                <div class="container-fluid bg-light" style="min-height: 100vh;">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" 
+                             style="background-color: #2c3e50; min-height: 100vh;">
+                            <div class="position-sticky pt-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-white">📖 BIBLICAL GAME</h4>
+                                    <p class="text-muted">Guide Utilisateur</p>
+                                </div>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide">
+                                            <i class="fa fa-home me-2"></i>Accueil
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/installation">
+                                            <i class="fa fa-download me-2"></i>Installation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link active text-white bg-dark" href="/web/biblical-game-guide/bible-management">
+                                            <i class="fa fa-book me-2"></i>Gestion Bible
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/game-stages">
+                                            <i class="fa fa-trophy me-2"></i>Étapes du Jeu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/configuration">
+                                            <i class="fa fa-cog me-2"></i>Configuration
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mb-4">
+                                <ol class="breadcrumb bg-white p-2 rounded shadow-sm">
+                                    <li class="breadcrumb-item"><a href="/web/biblical-game-guide">Accueil</a></li>
+                                    <li class="breadcrumb-item active">Gestion Bible</li>
+                                </ol>
+                            </nav>
+
+                            <!-- Page Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">📚 Gestion de la Bible Louis Segond</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-print me-1"></i>Imprimer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Introduction -->
+                            <div class="alert alert-success">
+                                <h5 class="alert-heading"><i class="fa fa-info-circle me-2"></i>À propos</h5>
+                                <p class="mb-0">Cette section explique comment administrer les versets et références bibliques de la traduction Louis Segond pour enrichir votre jeu interactif.</p>
+                            </div>
+
+                            <!-- Access Management -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">1</span>Accès à la gestion Bible</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Pour accéder aux outils de gestion de la Bible :</p>
+                                    <ol class="list-group list-group-numbered mb-3">
+                                        <li class="list-group-item">Connectez-vous en tant qu'administrateur</li>
+                                        <li class="list-group-item">Accédez au menu <strong>Biblical Game</strong></li>
+                                        <li class="list-group-item">Sélectionnez <strong>Gestion Bible</strong></li>
+                                        <li class="list-group-item">Choisissez l'action souhaitée (Créer, Modifier, Consulter)</li>
+                                    </ol>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle me-2"></i>
+                                        Seuls les utilisateurs avec les droits d'administration peuvent modifier le contenu biblique.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Biblical Structure -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">2</span>Structure des données bibliques</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>La base de données biblique est organisée selon la structure suivante :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-success">Ancien Testament</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-book text-success me-2"></i>39 livres canoniques
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-scroll text-success me-2"></i>929 chapitres
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-quote-right text-success me-2"></i>23,214 versets
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-success">Nouveau Testament</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-book text-success me-2"></i>27 livres canoniques
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-scroll text-success me-2"></i>260 chapitres
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-quote-right text-success me-2"></i>7,959 versets
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-9">
-                                        <!-- Contenu -->
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2>Configuration du jeu</h2>
-                                                
-                                                <h3>Paramètres généraux</h3>
-                                                <p>Accédez à <strong>Configuration → Paramètres du Jeu</strong> pour modifier :</p>
-                                                <ul>
-                                                    <li>Temps limite par question</li>
-                                                    <li>Nombre de questions par niveau</li>
-                                                    <li>Score minimum pour passer au niveau suivant</li>
-                                                    <li>Activation/désactivation du bonus de vitesse</li>
-                                                </ul>
-                                                
-                                                <h3>Gestion des niveaux</h3>
-                                                <p>Dans <strong>Configuration → Niveaux de Jeu</strong>, vous pouvez :</p>
-                                                <ul>
-                                                    <li>Créer de nouveaux niveaux</li>
-                                                    <li>Modifier la difficulté</li>
-                                                    <li>Associer des types de questions spécifiques</li>
-                                                    <li>Définir les prérequis</li>
-                                                </ul>
-                                                
-                                                <h3>Données bibliques</h3>
-                                                <p>Pour enrichir le contenu du jeu :</p>
-                                                <ul>
-                                                    <li><strong>Livres</strong> : Ajoutez ou modifiez les livres bibliques</li>
-                                                    <li><strong>Chapitres</strong> : Gérez les chapitres de chaque livre</li>
-                                                    <li><strong>Versets</strong> : Importez ou saisissez manuellement les versets</li>
-                                                </ul>
-                                                
-                                                <h3>Conseils de configuration</h3>
-                                                <div class="alert alert-info">
-                                                    <h5>Bonnes pratiques :</h5>
-                                                    <ul class="mb-0">
-                                                        <li>Testez toujours après une modification</li>
-                                                        <li>Sauvegardez vos paramètres avant de faire des changements majeurs</li>
-                                                        <li>Adaptez la difficulté à votre public cible</li>
-                                                        <li>Vérifiez régulièrement la qualité des données bibliques</li>
+                                </div>
+                            </div>
+
+                            <!-- Adding Verses -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">3</span>Ajout de nouveaux versets</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Pour ajouter de nouveaux versets à la base de données :</p>
+                                    <ol class="list-group list-group-numbered mb-3">
+                                        <li class="list-group-item">Cliquez sur <strong>Créer</strong> dans la vue liste</li>
+                                        <li class="list-group-item">Renseignez les champs obligatoires :
+                                            <ul class="mt-2">
+                                                <li><strong>Livre :</strong> Sélectionnez le livre biblique</li>
+                                                <li><strong>Chapitre :</strong> Numéro du chapitre</li>
+                                                <li><strong>Verset :</strong> Numéro du verset</li>
+                                                <li><strong>Texte :</strong> Contenu exact selon Louis Segond</li>
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">Définissez les métadonnées :
+                                            <ul class="mt-2">
+                                                <li><strong>Thématique :</strong> Catégorie du verset</li>
+                                                <li><strong>Niveau :</strong> Difficulté d'utilisation</li>
+                                                <li><strong>Mots clés :</strong> Tags pour la recherche</li>
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">Validez et enregistrez</li>
+                                    </ol>
+                                    <div class="alert alert-warning">
+                                        <i class="fa fa-exclamation-triangle me-2"></i>
+                                        Vérifiez toujours l'exactitude du texte avec la version Louis Segond officielle.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thematic Organization -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">4</span>Organisation thématique</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Le système propose plusieurs thématiques pour organiser les versets :</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h6 class="text-primary">Histoire biblique</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">Création</li>
+                                                <li class="list-group-item border-0 py-1">Patriarches</li>
+                                                <li class="list-group-item border-0 py-1">Exode</li>
+                                                <li class="list-group-item border-0 py-1">Rois et Prophètes</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-primary">Enseignements</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">Paraboles</li>
+                                                <li class="list-group-item border-0 py-1">Sermon sur la montagne</li>
+                                                <li class="list-group-item border-0 py-1">Épîtres pauliniennes</li>
+                                                <li class="list-group-item border-0 py-1">Sagesse</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-primary">Prophéties</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">Messianiques</li>
+                                                <li class="list-group-item border-0 py-1">Eschatologiques</li>
+                                                <li class="list-group-item border-0 py-1">Apocalypse</li>
+                                                <li class="list-group-item border-0 py-1">Jugements</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Search and Filters -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">5</span>Recherche et filtres</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Utilisez les outils de recherche pour naviguer efficacement :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-success">Filtres disponibles</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-filter text-success me-2"></i>
+                                                    Par livre biblique
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-filter text-success me-2"></i>
+                                                    Par thématique
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-filter text-success me-2"></i>
+                                                    Par niveau de difficulté
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-success">Recherche textuelle</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-search text-success me-2"></i>
+                                                    Dans le contenu des versets
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-search text-success me-2"></i>
+                                                    Par mots-clés
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center border-0 py-2">
+                                                    <i class="fa fa-search text-success me-2"></i>
+                                                    Par référence (livre:chapitre:verset)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Import/Export -->
+                            <div class="card mb-4 border-success">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-success me-2">6</span>Import et Export</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">📥 Import de données</h6>
+                                            <p>Importez des versets en masse via :</p>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-file-csv text-primary me-2"></i>Fichiers CSV
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-file-excel text-success me-2"></i>Fichiers Excel
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-code text-info me-2"></i>Format JSON
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">📤 Export de données</h6>
+                                            <p>Exportez votre base biblique vers :</p>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-file-pdf text-danger me-2"></i>Rapport PDF
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-file-excel text-success me-2"></i>Feuille de calcul
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-database text-secondary me-2"></i>Sauvegarde SQL
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle me-2"></i>
+                                        Les imports/exports respectent la structure des champs obligatoires et les validations de données.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Validation -->
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3 class="mb-0"><i class="fa fa-shield-alt me-2"></i>Validation et qualité</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Le système intègre plusieurs mécanismes de validation :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">Contrôles automatiques</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>
+                                                    Unicité des références (livre:chapitre:verset)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>
+                                                    Cohérence des numéros de chapitres/versets
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-circle text-success me-2"></i>
+                                                    Validation des caractères et encodage UTF-8
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">Bonnes pratiques</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-lightbulb text-warning me-2"></i>
+                                                    Sauvegarder avant modifications importantes
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-lightbulb text-warning me-2"></i>
+                                                    Tester les imports sur un échantillon
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-lightbulb text-warning me-2"></i>
+                                                    Documenter les sources et modifications
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+
+                <!-- Scroll to Top Button -->
+                <button type="button" class="btn btn-success rounded-circle position-fixed shadow" 
+                        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 1000;"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentPath = window.location.pathname;
+                        const navLinks = document.querySelectorAll('.nav-link');
+                        
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === currentPath) {
+                                link.classList.add('bg-dark', 'active');
+                                link.classList.remove('text-white');
+                            } else {
+                                link.classList.remove('bg-dark', 'active');
+                                if (!link.classList.contains('text-white')) {
+                                    link.classList.add('text-white');
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </t>
+        </template>
+
+        <!-- ========================== -->
+        <!-- GAME STAGES TEMPLATE -->
+        <!-- ========================== -->
+        <template id="biblical_game_stages_template" name="Game Stages Guide">
+            <t t-call="web.basic_layout">
+                <div class="container-fluid bg-light" style="min-height: 100vh;">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" 
+                             style="background-color: #2c3e50; min-height: 100vh;">
+                            <div class="position-sticky pt-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-white">📖 BIBLICAL GAME</h4>
+                                    <p class="text-muted">Guide Utilisateur</p>
+                                </div>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide">
+                                            <i class="fa fa-home me-2"></i>Accueil
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/installation">
+                                            <i class="fa fa-download me-2"></i>Installation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/bible-management">
+                                            <i class="fa fa-book me-2"></i>Gestion Bible
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link active text-white bg-dark" href="/web/biblical-game-guide/game-stages">
+                                            <i class="fa fa-trophy me-2"></i>Étapes du Jeu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/configuration">
+                                            <i class="fa fa-cog me-2"></i>Configuration
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mb-4">
+                                <ol class="breadcrumb bg-white p-2 rounded shadow-sm">
+                                    <li class="breadcrumb-item"><a href="/web/biblical-game-guide">Accueil</a></li>
+                                    <li class="breadcrumb-item active">Étapes du Jeu</li>
+                                </ol>
+                            </nav>
+
+                            <!-- Page Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">🏆 Configuration des Étapes du Jeu</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-print me-1"></i>Imprimer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Introduction -->
+                            <div class="alert alert-warning">
+                                <h5 class="alert-heading"><i class="fa fa-info-circle me-2"></i>À propos</h5>
+                                <p class="mb-0">Cette section explique comment configurer les niveaux, défis et système de progression pour créer une expérience de jeu enrichissante et personnalisée.</p>
+                            </div>
+
+                            <!-- Stage Creation -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">1</span>Création d'une nouvelle étape</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Pour créer une nouvelle étape de jeu :</p>
+                                    <ol class="list-group list-group-numbered mb-3">
+                                        <li class="list-group-item">Accédez au menu <strong>Biblical Game > Étapes du Jeu</strong></li>
+                                        <li class="list-group-item">Cliquez sur <strong>Créer</strong></li>
+                                        <li class="list-group-item">Renseignez les informations de base :
+                                            <ul class="mt-2">
+                                                <li><strong>Nom :</strong> Titre de l'étape</li>
+                                                <li><strong>Description :</strong> Explication du défi</li>
+                                                <li><strong>Niveau :</strong> Numéro d'ordre (1, 2, 3...)</li>
+                                                <li><strong>Difficulté :</strong> Facile, Moyen, Difficile</li>
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">Configurez les paramètres avancés</li>
+                                        <li class="list-group-item">Enregistrez l'étape</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Difficulty Levels -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">2</span>Niveaux de difficulté</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card border-success">
+                                                <div class="card-header bg-success text-white text-center">
+                                                    <h5 class="mb-0">🟢 Facile</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li>• Versets célèbres</li>
+                                                        <li>• Questions à choix multiples</li>
+                                                        <li>• 4-5 réponses possibles</li>
+                                                        <li>• Aide contextuelle</li>
+                                                        <li>• Temps illimité</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning">
+                                                <div class="card-header bg-warning text-white text-center">
+                                                    <h5 class="mb-0">🟡 Moyen</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li>• Versets moins connus</li>
+                                                        <li>• Questions ouvertes courtes</li>
+                                                        <li>• Références à compléter</li>
+                                                        <li>• Indices limités</li>
+                                                        <li>• Temps modéré</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                                                                            <div class="card border-danger">
+                                                <div class="card-header bg-danger text-white text-center">
+                                                    <h5 class="mb-0">🔴 Difficile</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li>• Versets obscurs</li>
+                                                        <li>• Questions complexes</li>
+                                                        <li>• Analyse contextuelle</li>
+                                                        <li>• Aucune aide</li>
+                                                        <li>• Temps limité</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -317,11 +1051,775 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <!-- Progression System -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">3</span>Système de progression</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Configurez la progression des joueurs à travers les étapes :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">⭐ Système de points</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-star text-warning me-2"></i>
+                                                    Points par bonne réponse (10-50 pts)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-clock text-info me-2"></i>
+                                                    Bonus de rapidité (5-20 pts)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-fire text-danger me-2"></i>
+                                                    Multiplicateur de série (x2, x3)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">🏅 Système de niveaux</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-medal text-bronze me-2"></i>
+                                                    Débutant (0-100 pts)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-medal text-info me-2"></i>
+                                                    Intermédiaire (101-500 pts)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-medal text-warning me-2"></i>
+                                                    Expert (501+ pts)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Question Types -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">4</span>Types de questions</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">📝 Questions fermées</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-check-square text-success me-2"></i>
+                                                    Choix multiples (QCM)
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-toggle-on text-info me-2"></i>
+                                                    Vrai/Faux
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-sort text-warning me-2"></i>
+                                                    Remise en ordre
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-link text-secondary me-2"></i>
+                                                    Association d'éléments
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">✏️ Questions ouvertes</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-edit text-primary me-2"></i>
+                                                    Texte à compléter
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-quote-right text-success me-2"></i>
+                                                    Citation à identifier
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-search text-info me-2"></i>
+                                                    Recherche de référence
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-pen text-danger me-2"></i>
+                                                    Réponse libre courte
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thematic Stages -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">5</span>Étapes thématiques</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Organisez vos étapes par thèmes bibliques pour une progression cohérente :</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card border-primary">
+                                                <div class="card-header bg-primary text-white">
+                                                    <h6 class="mb-0">📜 Ancien Testament</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0 small">
+                                                        <li>• Genèse et Création</li>
+                                                        <li>• Patriarches</li>
+                                                        <li>• Exode et Loi</li>
+                                                        <li>• Conquête de Canaan</li>
+                                                        <li>• Juges et Rois</li>
+                                                        <li>• Prophètes majeurs</li>
+                                                        <li>• Prophètes mineurs</li>
+                                                        <li>• Livres de sagesse</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-success">
+                                                <div class="card-header bg-success text-white">
+                                                    <h6 class="mb-0">✝️ Nouveau Testament</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0 small">
+                                                        <li>• Évangiles synoptiques</li>
+                                                        <li>• Évangile de Jean</li>
+                                                        <li>• Actes des Apôtres</li>
+                                                        <li>• Épîtres pauliniennes</li>
+                                                        <li>• Épîtres générales</li>
+                                                        <li>• Apocalypse</li>
+                                                        <li>• Paraboles</li>
+                                                        <li>• Miracles</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-info">
+                                                <div class="card-header bg-info text-white">
+                                                    <h6 class="mb-0">🎯 Spécialisées</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mb-0 small">
+                                                        <li>• Personnages bibliques</li>
+                                                        <li>• Géographie biblique</li>
+                                                        <li>• Chronologie</li>
+                                                        <li>• Symboles et métaphores</li>
+                                                        <li>• Prières célèbres</li>
+                                                        <li>• Psaumes</li>
+                                                        <li>• Prophéties messianiques</li>
+                                                        <li>• Culture et traditions</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stage Configuration -->
+                            <div class="card mb-4 border-warning">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-warning me-2">6</span>Configuration avancée</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">⚙️ Paramètres temporels</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Durée par question :</strong> 30s à 5min
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Temps total :</strong> 5min à 60min
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Pause autorisée :</strong> Oui/Non
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Reprises :</strong> Limitées/Illimitées
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning">🎯 Conditions de réussite</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Score minimum :</strong> 50% à 90%
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Tentatives max :</strong> 1 à 5
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Prérequis :</strong> Étapes précédentes
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Déblocage :</strong> Automatique/Manuel
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Analytics -->
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3 class="mb-0"><i class="fa fa-chart-bar me-2"></i>Analyse et statistiques</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Suivez les performances des joueurs et l'efficacité de vos étapes :</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h6 class="text-info">📊 Métriques de performance</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-percentage text-success me-2"></i>
+                                                    Taux de réussite par étape
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-clock text-primary me-2"></i>
+                                                    Temps moyen de complétion
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-redo text-warning me-2"></i>
+                                                    Nombre de tentatives moyennes
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-info">👥 Données utilisateurs</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-users text-info me-2"></i>
+                                                    Nombre de participants
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-chart-line text-success me-2"></i>
+                                                    Progression moyenne
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-trophy text-warning me-2"></i>
+                                                    Scores les plus élevés
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-info">🔧 Optimisation</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-question-circle text-danger me-2"></i>
+                                                    Questions problématiques
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-balance-scale text-secondary me-2"></i>
+                                                    Ajustement de difficulté
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <i class="fa fa-lightbulb text-warning me-2"></i>
+                                                    Suggestions d'amélioration
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle me-2"></i>
+                                        Les statistiques sont mises à jour en temps réel et peuvent être exportées pour analyse approfondie.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
                     </div>
                 </div>
+
+                <!-- Scroll to Top Button -->
+                <button type="button" class="btn btn-warning rounded-circle position-fixed shadow" 
+                        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 1000;"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentPath = window.location.pathname;
+                        const navLinks = document.querySelectorAll('.nav-link');
+                        
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === currentPath) {
+                                link.classList.add('bg-dark', 'active');
+                                link.classList.remove('text-white');
+                            } else {
+                                link.classList.remove('bg-dark', 'active');
+                                if (!link.classList.contains('text-white')) {
+                                    link.classList.add('text-white');
+                                }
+                            }
+                        });
+                    });
+                </script>
             </t>
         </template>
-        
+
+        <!-- ========================== -->
+        <!-- CONFIGURATION TEMPLATE -->
+        <!-- ========================== -->
+        <template id="biblical_game_configuration_template" name="Configuration Guide">
+            <t t-call="web.basic_layout">
+                <div class="container-fluid bg-light" style="min-height: 100vh;">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" 
+                             style="background-color: #2c3e50; min-height: 100vh;">
+                            <div class="position-sticky pt-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-white">📖 BIBLICAL GAME</h4>
+                                    <p class="text-muted">Guide Utilisateur</p>
+                                </div>
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide">
+                                            <i class="fa fa-home me-2"></i>Accueil
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/installation">
+                                            <i class="fa fa-download me-2"></i>Installation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/bible-management">
+                                            <i class="fa fa-book me-2"></i>Gestion Bible
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link text-white" href="/web/biblical-game-guide/game-stages">
+                                            <i class="fa fa-trophy me-2"></i>Étapes du Jeu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-1">
+                                        <a class="nav-link active text-white bg-dark" href="/web/biblical-game-guide/configuration">
+                                            <i class="fa fa-cog me-2"></i>Configuration
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mb-4">
+                                <ol class="breadcrumb bg-white p-2 rounded shadow-sm">
+                                    <li class="breadcrumb-item"><a href="/web/biblical-game-guide">Accueil</a></li>
+                                    <li class="breadcrumb-item active">Configuration</li>
+                                </ol>
+                            </nav>
+
+                            <!-- Page Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">⚙️ Configuration et Personnalisation</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-print me-1"></i>Imprimer
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Introduction -->
+                            <div class="alert alert-info">
+                                <h5 class="alert-heading"><i class="fa fa-info-circle me-2"></i>À propos</h5>
+                                <p class="mb-0">Cette section explique comment personnaliser l'expérience utilisateur avec des paramètres avancés, thématiques et options d'interface pour optimiser votre jeu biblique.</p>
+                            </div>
+
+                            <!-- Global Settings -->
+                            <div class="card mb-4 border-info">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-info me-2">1</span>Paramètres généraux</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Configurez les paramètres globaux du jeu :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-info">🎮 Interface de jeu</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Langue :</strong> Français, Anglais, Espagnol
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Thème visuel :</strong> Clair, Sombre, Auto
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Animation :</strong> Activée/Désactivée
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Sons :</strong> Activés/Désactivés
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-info">⏱️ Paramètres temporels</h6>
+                                            <ul class="list-group list-group-flush mb-3">
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Temps par défaut :</strong> 2 minutes
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Avertissement :</strong> 30 secondes avant
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Auto-soumission :</strong> Activée
+                                                </li>
+                                                <li class="list-group-item border-0 py-1">
+                                                    <strong>Pause autorisée :</strong> Oui
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Game Difficulty -->
+                            <div class="card mb-4 border-info">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-info me-2">2</span>Configuration de la difficulté</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Personnalisez les niveaux de difficulté selon votre audience :</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card border-success">
+                                                <div class="card-header bg-success text-white">
+                                                    <h6 class="mb-0">🟢 Niveau Facile</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h6>Paramètres configurables :</h6>
+                                                    <ul class="list-unstyled small">
+                                                        <li>• <strong>Nb questions :</strong> 5-10</li>
+                                                        <li>• <strong>Temps/question :</strong> 2-5 min</li>
+                                                        <li>• <strong>Score requis :</strong> 50%</li>
+                                                        <li>• <strong>Tentatives :</strong> Illimitées</li>
+                                                        <li>• <strong>Indices :</strong> 3 par question</li>
+                                                        <li>• <strong>Références :</strong> Affichées</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning">
+                                                <div class="card-header bg-warning text-white">
+                                                    <h6 class="mb-0">🟡 Niveau Moyen</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h6>Paramètres configurables :</h6>
+                                                    <ul class="list-unstyled small">
+                                                        <li>• <strong>Nb questions :</strong> 10-20</li>
+                                                        <li>• <strong>Temps/question :</strong> 1-3 min</li>
+                                                        <li>• <strong>Score requis :</strong> 70%</li>
+                                                        <li>• <strong>Tentatives :</strong> 3 maximum</li>
+                                                        <li>• <strong>Indices :</strong> 1 par question</li>
+                                                        <li>• <strong>Références :</strong> Partielles</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-danger">
+                                                <div class="card-header bg-danger text-white">
+                                                    <h6 class="mb-0">🔴 Niveau Difficile</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h6>Paramètres configurables :</h6>
+                                                    <ul class="list-unstyled small">
+                                                        <li>• <strong>Nb questions :</strong> 20-50</li>
+                                                        <li>• <strong>Temps/question :</strong> 30s-2 min</li>
+                                                        <li>• <strong>Score requis :</strong> 80%</li>
+                                                        <li>• <strong>Tentatives :</strong> 1 unique</li>
+                                                        <li>• <strong>Indices :</strong> Aucun</li>
+                                                        <li>• <strong>Références :</strong> Masquées</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Theme Configuration -->
+                            <div class="card mb-4 border-info">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-info me-2">3</span>Thématiques et contenu</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Activez ou désactivez les thématiques selon vos besoins :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">📚 Thématiques bibliques</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Ancien Testament
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Nouveau Testament
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Paraboles et enseignements
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox"/>
+                                                <label class="form-check-label">
+                                                    Prophéties messianiques
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox"/>
+                                                <label class="form-check-label">
+                                                    Miracles et signes
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">🎯 Focus thématiques</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox"/>
+                                                <label class="form-check-label">
+                                                    Personnages bibliques
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Événements clés
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox"/>
+                                                <label class="form-check-label">
+                                                    Lieux géographiques
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox"/>
+                                                <label class="form-check-label">
+                                                    Symboles et métaphores
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email Integration -->
+                            <div class="card mb-4 border-info">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-info me-2">4</span>Intégration email</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Configurez les notifications et partage des résultats :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-info">📧 Notifications</h6>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Activer les notifications
+                                                </label>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email d'expéditeur</label>
+                                                <input type="email" class="form-control" value="noreply@votredomaine.com"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Sujet par défaut</label>
+                                                <input type="text" class="form-control" value="Vos résultats Biblical Game"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-info">📤 Partage des résultats</h6>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Autoriser le partage
+                                                </label>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Format des résultats</label>
+                                                <select class="form-select">
+                                                    <option>Détail complet</option>
+                                                    <option selected="selected">Résumé</option>
+                                                    <option>Score seulement</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Inclure un verset inspirant</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                    <label class="form-check-label">
+                                                        Oui, aléatoire
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- UTM Tracking -->
+                            <div class="card mb-4 border-info">
+                                <div class="card-header bg-white border-bottom-0">
+                                    <h3 class="mb-0"><span class="badge bg-info me-2">5</span>Suivi UTM</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Activez le suivi des campagnes marketing :</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                <label class="form-check-label">
+                                                    Activer le suivi UTM
+                                                </label>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Source par défaut</label>
+                                                <input type="text" class="form-control" value="direct"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Moyen par défaut</label>
+                                                <input type="text" class="form-control" value="organic"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-info">📊 Paramètres avancés</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nom de campagne</label>
+                                                <input type="text" class="form-control" value="biblical_game_launch"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Terme par défaut</label>
+                                                <input type="text" class="form-control" value="bible_game"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Contenu par défaut</label>
+                                                <input type="text" class="form-control" value="landing"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Settings -->
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3 class="mb-0"><i class="fa fa-sliders-h me-2"></i>Paramètres avancés</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">⚙️ Options système</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Mode maintenance</label>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"/>
+                                                    <label class="form-check-label">
+                                                        Activer
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Limite de joueurs simultanés</label>
+                                                <input type="number" class="form-control" value="100"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Intervalle de sauvegarde</label>
+                                                <select class="form-select">
+                                                    <option>5 minutes</option>
+                                                    <option selected="selected">15 minutes</option>
+                                                    <option>30 minutes</option>
+                                                    <option>1 heure</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary">🔐 Sécurité</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Authentification requise</label>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                    <label class="form-check-label">
+                                                        Oui pour enregistrer les scores
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Niveau d'accès minimum</label>
+                                                <select class="form-select">
+                                                    <option selected="selected">Tous les utilisateurs</option>
+                                                    <option>Utilisateurs enregistrés</option>
+                                                    <option>Administrateurs seulement</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Protection anti-triche</label>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" checked="checked"/>
+                                                    <label class="form-check-label">
+                                                        Activer
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-warning mt-3">
+                                        <i class="fa fa-exclamation-triangle me-2"></i>
+                                        Les paramètres avancés peuvent affecter les performances et la stabilité du système. Modifiez avec précaution.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="text-end mt-4">
+                                <button type="button" class="btn btn-primary btn-lg">
+                                    <i class="fa fa-save me-2"></i>Enregistrer les configurations
+                                </button>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+
+                <!-- Scroll to Top Button -->
+                <button type="button" class="btn btn-info rounded-circle position-fixed shadow" 
+                        style="bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 1000;"
+                        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const currentPath = window.location.pathname;
+                        const navLinks = document.querySelectorAll('.nav-link');
+                        
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === currentPath) {
+                                link.classList.add('bg-dark', 'active');
+                                link.classList.remove('text-white');
+                            } else {
+                                link.classList.remove('bg-dark', 'active');
+                                if (!link.classList.contains('text-white')) {
+                                    link.classList.add('text-white');
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </t>
+        </template>
     </data>
 </odoo>
