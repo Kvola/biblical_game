@@ -1506,10 +1506,23 @@ function waitForElement(selector, maxWait = 10000) {
 }
 
 /**
+ * Vérifie si nous sommes sur la route du jeu
+ */
+function isOnGameRoute() {
+    return window.location.pathname === '/start_biblical_game';
+}
+
+/**
  * Initialisation sécurisée au chargement de la page
  */
 async function initializeBiblicalGame() {
     try {
+        // Vérifier si nous sommes sur la bonne route avant d'initialiser
+        if (!isOnGameRoute()) {
+            console.log("Biblical Game not initialized - not on game route");
+            return;
+        }
+
         console.log("📖 Biblical Game Module Loading...");
         
         // Attendre que le DOM soit prêt
@@ -1548,6 +1561,9 @@ async function initializeBiblicalGame() {
         console.log("✅ Biblical Game fully loaded and ready");
         
     } catch (error) {
+        // Ne pas afficher d'erreur si nous ne sommes pas sur la route du jeu
+        if (!isOnGameRoute()) return;
+
         console.error("❌ Critical initialization error:", error);
         
         // Afficher une erreur critique à l'utilisateur
@@ -1569,11 +1585,13 @@ async function initializeBiblicalGame() {
     }
 }
 
-// Lancer l'initialisation
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeBiblicalGame);
-} else {
-    initializeBiblicalGame();
+// Lancer l'initialisation uniquement si nous sommes sur la route du jeu
+if (isOnGameRoute()) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeBiblicalGame);
+    } else {
+        initializeBiblicalGame();
+    }
 }
 
 // ==================== GESTIONNAIRES D'ERREURS GLOBAUX ====================
@@ -1582,6 +1600,8 @@ if (document.readyState === 'loading') {
  * Gestionnaire d'erreurs JavaScript globales
  */
 window.addEventListener('error', (event) => {
+    if (!isOnGameRoute()) return;
+    
     console.error('❌ Global JavaScript error:', event.error);
     if (biblicalGameInstance) {
         biblicalGameInstance.showAlert(MESSAGES.unexpectedError, "warning");
@@ -1592,6 +1612,8 @@ window.addEventListener('error', (event) => {
  * Gestionnaire des promesses rejetées
  */
 window.addEventListener('unhandledrejection', (event) => {
+    if (!isOnGameRoute()) return;
+    
     console.error('❌ Unhandled promise rejection:', event.reason);
     if (biblicalGameInstance) {
         biblicalGameInstance.showAlert(MESSAGES.serverError, "warning");
@@ -1602,6 +1624,8 @@ window.addEventListener('unhandledrejection', (event) => {
  * Nettoyage lors de la fermeture de la page
  */
 window.addEventListener('beforeunload', () => {
+    if (!isOnGameRoute()) return;
+    
     if (biblicalGameInstance) {
         biblicalGameInstance.cleanup();
     }
@@ -1611,6 +1635,8 @@ window.addEventListener('beforeunload', () => {
  * Gestion de la perte de focus/reprise de focus
  */
 document.addEventListener('visibilitychange', () => {
+    if (!isOnGameRoute()) return;
+    
     if (biblicalGameInstance && biblicalGameInstance.isGameActive) {
         if (document.hidden && !biblicalGameInstance.isPaused) {
             // Auto-pause quand l'onglet perd le focus
