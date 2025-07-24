@@ -8,7 +8,7 @@ import { registry } from "@web/core/registry";
 function userGuideItem(env) {
     return {
         type: "item",
-        id: "b_user_guide",
+        id: "n_user_guide",
         description: markup(
             `<div class="d-flex align-items-center">
                 <i class="fa fa-book me-2"></i>
@@ -29,4 +29,4 @@ function userGuideItem(env) {
 
 registry
     .category("user_menuitems")
-    .add("b_user_guide", userGuideItem);
+    .add("n_user_guide", userGuideItem);

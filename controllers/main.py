@@ -13,7 +13,7 @@ class BiblicalGameController(http.Controller):
     @http.route('/web/user-guide', type='http', auth='user', website=False)
     def user_guide(self, **kwargs):
         """Main user guide page"""
-        return request.render('custom_novago.biblical_game_guide_template', {
+        return request.render('biblical_game.biblical_game_guide_template', {
             'base_url': request.httprequest.url_root
         })
 
