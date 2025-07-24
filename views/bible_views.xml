@@ -1,58 +1,97 @@
 <odoo>
+    <!-- Vue Livre -->
     <record id="view_book_tree" model="ir.ui.view">
         <field name="name">biblical.book.tree</field>
         <field name="model">biblical.game.book</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="book_number"/>
+            <tree string="Livres Bibliques" decoration-info="testament == 'new'">
+                <field name="name" string="Nom du Livre"/>
+                <field name="book_number" string="Numéro"/>
+                <field name="testament" string="Testament"/>
+                <field name="chapter_count" string="Chapitres"/>
+                <field name="verse_count" string="Verset"/>
             </tree>
         </field>
     </record>
 
+    <record id="view_book_form" model="ir.ui.view">
+        <field name="name">biblical.book.form</field>
+        <field name="model">biblical.game.book</field>
+        <field name="arch" type="xml">
+            <form string="Livre Biblique">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="book_number"/>
+                        <field name="testament" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Chapitres">
+                            <field name="chapter_ids" mode="tree">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="chapter_number"/>
+                                    <field name="verse_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Chapitre -->
     <record id="view_chapter_tree" model="ir.ui.view">
         <field name="name">biblical.chapter.tree</field>
         <field name="model">biblical.game.chapter</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Chapitres">
                 <field name="name"/>
                 <field name="chapter_number"/>
                 <field name="book_id"/>
+                <field name="verse_count"/>
             </tree>
         </field>
     </record>
 
+    <!-- Vue Verset -->
     <record id="view_verse_tree" model="ir.ui.view">
         <field name="name">biblical.verse.tree</field>
         <field name="model">biblical.game.verse</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Versets" decoration-success="is_popular == True">
                 <field name="name"/>
                 <field name="verse_number"/>
-                <field name="text"/>
                 <field name="chapter_id"/>
+                <field name="word_count"/>
+                <field name="is_popular" string="Populaire?"/>
             </tree>
         </field>
     </record>
 
-     <!-- Action pour les Livres -->
+    <!-- Actions -->
     <record id="action_biblical_book_tree" model="ir.actions.act_window">
-        <field name="name">Livres</field>
+        <field name="name">Livres Bibliques</field>
         <field name="res_model">biblical.game.book</field>
         <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configurez ici les livres bibliques disponibles pour le jeu
+            </p>
+        </field>
     </record>
 
-    <!-- Action pour les Chapitres -->
     <record id="action_biblical_chapter_tree" model="ir.actions.act_window">
         <field name="name">Chapitres</field>
         <field name="res_model">biblical.game.chapter</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Action pour les Versets -->
     <record id="action_biblical_verse_tree" model="ir.actions.act_window">
         <field name="name">Versets</field>
         <field name="res_model">biblical.game.verse</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'default_is_popular': False}</field>
     </record>
 </odoo>

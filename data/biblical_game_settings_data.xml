@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Configuration par défaut du jeu -->
+        <record id="default_game_settings" model="biblical.game.settings">
+            <field name="name">Configuration Principale</field>
+            <field name="timer_duration">45</field>
+            <field name="max_questions_per_game">15</field>
+            <field name="difficulty_level">medium</field>
+            <field name="allow_hints">True</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Livres de démonstration -->
+        <record id="book_genesis" model="biblical.game.book">
+            <field name="name">Genèse</field>
+            <field name="book_number">1</field>
+        </record>
+
+        <record id="book_exodus" model="biblical.game.book">
+            <field name="name">Exode</field>
+            <field name="book_number">2</field>
+        </record>
+
+        <record id="book_matthew" model="biblical.game.book">
+            <field name="name">Matthieu</field>
+            <field name="book_number">40</field>
+        </record>
+
+        <record id="book_john" model="biblical.game.book">
+            <field name="name">Jean</field>
+            <field name="book_number">43</field>
+        </record>
+
+        <!-- Association des livres aux paramètres -->
+        <record id="default_game_settings" model="biblical.game.settings">
+            <field name="book_ids" eval="[(6, 0, [ref('book_genesis'), ref('book_exodus'), ref('book_matthew'), ref('book_john')])]"/>
+        </record>
+
+        <!-- Chapitres de démonstration -->
+        <record id="genesis_chapter_1" model="biblical.game.chapter">
+            <field name="chapter_number">1</field>
+            <field name="book_id" ref="book_genesis"/>
+        </record>
+
+        <record id="matthew_chapter_5" model="biblical.game.chapter">
+            <field name="chapter_number">5</field>
+            <field name="book_id" ref="book_matthew"/>
+        </record>
+
+        <!-- Versets de démonstration -->
+        <record id="genesis_1_1" model="biblical.game.verse">
+            <field name="verse_number">1</field>
+            <field name="text">Au commencement, Dieu créa les cieux et la terre.</field>
+            <field name="chapter_id" ref="genesis_chapter_1"/>
+            <field name="is_popular">True</field>
+        </record>
+
+        <record id="matthew_5_3" model="biblical.game.verse">
+            <field name="verse_number">3</field>
+            <field name="text">Heureux les pauvres en esprit, car le royaume des cieux est à eux !</field>
+            <field name="chapter_id" ref="matthew_chapter_5"/>
+            <field name="is_popular">True</field>
+        </record>
+
+    </data>
+</odoo>

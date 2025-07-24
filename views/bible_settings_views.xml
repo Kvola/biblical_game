@@ -5,30 +5,36 @@
             <field name="name">biblical.game.settings.form</field>
             <field name="model">biblical.game.settings</field>
             <field name="arch" type="xml">
-                <form string="Paramètres">
+                <form string="Paramètres du Jeu">
                     <sheet>
                         <div class="oe_title">
-                            <label for="name"/>
                             <h1>
-                                <field name="name" placeholder="Titre" required="1"/>
+                                <field name="name" placeholder="Nom des paramètres" required="1"/>
                             </h1>
                         </div>
-                        <group col="4">
-                            <field name="active" widget="boolean_button"/>
-                            <field name="timer_duration"/>
+                        <group>
+                            <group>
+                                <field name="active" string="Actif" widget="boolean_button"/>
+                                <field name="timer_duration" string="Durée du timer (sec)"/>
+                                <field name="max_questions_per_game" string="Questions par partie"/>
+                                <field name="difficulty_level" string="Niveau de difficulté"/>
+                            </group>
+                            <group>
+                                <field name="allow_hints" string="Autoriser les indices"/>
+                            </group>
                         </group>
                         <notebook>
-                            <page string="Livres">
+                            <page string="Sélection des Livres">
                                 <group>
-                                    <field name="book_ids" widget="many2many_tags"/>
+                                    <field placeholder="Cliquez pour choisir vos livres..." name="book_ids" widget="many2many_tags" options="{'no_create': True}"/>
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
+                        <field name="message_follower_ids" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" />
                     </div>
                 </form>
             </field>
@@ -38,10 +44,11 @@
             <field name="name">biblical.game.settings.tree</field>
             <field name="model">biblical.game.settings</field>
             <field name="arch" type="xml">
-                <tree string="Paramètres" editable="top">
+                <tree string="Paramètres" decoration-muted="active==False">
                     <field name="name"/>
-                    <field name="book_ids" widget="many2many_tags"/>
-                    <field name="timer_duration"/>
+                    <field name="timer_duration" string="Durée (s)"/>
+                    <field name="max_questions_per_game" string="Questions"/>
+                    <field name="difficulty_level" string="Difficulté"/>
                     <field name="active" widget="boolean_button"/>
                 </tree>
             </field>
@@ -51,15 +58,17 @@
             <field name="name">biblical.game.settings.search</field>
             <field name="model">biblical.game.settings</field>
             <field name="arch" type="xml">
-                <search string="Paramètres">
-                    <field name="name"/>
-                    <field name="book_ids" widget="many2many_tags"/>
-                    <field name="timer_duration"/>
-                    <field name="active" widget="boolean_button"/>
+                <search string="Recherche de Paramètres">
+                    <field name="name" string="Nom"/>
+                    <filter name="active" string="Actifs" domain="[('active','=',True)]"/>
+                    <filter name="inactive" string="Inactifs" domain="[('active','=',False)]"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter name="group_by_difficulty" string="Par difficulté" context="{'group_by':'difficulty_level'}"/>
+                    </group>
                 </search>
             </field>
         </record>
-
         <record id="action_biblical_game_settings" model="ir.actions.act_window">
             <field name="name">Paramètres</field>
             <field name="type">ir.actions.act_window</field>

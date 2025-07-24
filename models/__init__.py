@@ -1,3 +1,4 @@
+from . import biblical_game_utils
 from . import bible
 from . import preload_data
 from . import biblical_game_stage

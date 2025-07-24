@@ -1,190 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="menu_biblical_game" model="website.menu">
-        <field name="name">Jeu biblique</field>
+    <record id="menu_biblical_game_web" model="website.menu">
+        <field name="name">Jeu Biblique</field>
         <field name="url">/start_biblical_game</field>
-        <field name="parent_id" ref="website.main_menu"/>
-        <field name="sequence">50</field>
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence">30</field>
     </record>
-    <record id="menu_biblical_contest_game" model="website.menu">
-        <field name="name">Concours biblique EBNG</field>
-        <field name="url">/start_biblical_contest_game</field>
-        <field name="parent_id" ref="website.main_menu"/>
-        <field name="sequence">50</field>
-    </record>
-    <template id="my_biblical_game_main" name="Jeu biblique solitaire">
+    <!-- Template principal du jeu biblique -->
+    <template id="biblical_game_main" name="Jeu Biblique">
         <t t-call="website.layout">
-            <div class="container mt-5">
+            <t t-set="title">Jeu Biblique</t>
+            <t t-set="additional_title">Testez vos connaissances bibliques</t>
+            
+            <!-- CSS personnalisé -->
+            <t t-call-assets="biblical_game.assets_frontend" t-css="false"/>
+            
+            <div class="biblical-game-container">
                 <!-- Titre du jeu -->
-                <div class="text-center mb-4">
-                    <h1 class="text-primary display-4 font-weight-bold">🎮 Jeu Biblique 🎮</h1>
-                    <p class="lead text-muted">Testez vos connaissances avec ce jeu passionnant !</p>
+                <div class="text-center mb-4 fade-in">
+                    <h1 class="game-title display-4">🎮 Jeu Biblique 🎮</h1>
+                    <p class="lead text-muted">Testez vos connaissances bibliques avec ce jeu passionnant !</p>
                 </div>
+
+                <!-- Messages d'erreur si pas de données -->
+                <t t-if="not settings_available or not verses_available">
+                    <div class="alert alert-warning text-center">
+                        <h4><i class="fa fa-exclamation-triangle"></i> Configuration requise</h4>
+                        <p t-if="not settings_available">Aucun paramètre de jeu n'est configuré.</p>
+                        <p t-if="not verses_available">Aucun verset biblique n'est disponible.</p>
+                        <p>Veuillez contacter l'administrateur pour configurer le jeu.</p>
+                    </div>
+                </t>
 
                 <!-- Sélecteur de paramètres -->
-                <div id="general_params" class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0">Paramètres du Jeu</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="settings_dropdown" class="font-weight-bold">Choisissez un paramètre :</label>
-                            <select id="settings_dropdown" class="form-control">
-                                <option value="">-- Sélectionnez un paramètre --</option>
-                            </select>
+                <t t-if="settings_available and verses_available">
+                    <div id="general_params" class="game-card mb-4 fade-in">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">
+                                <i class="fa fa-cog"></i> Paramètres du Jeu
+                            </h5>
                         </div>
-                        <button id="load_game_params" class="btn btn-secondary mt-3" onclick="loadSoloGameSettings()">Charger les paramètres</button>
-                        <button id="start_game_button" style="display:none;" class="btn btn-primary mt-3" onclick="loadReferenceQuestion()">Commencer le jeu</button>
-                    </div>
-                </div>
-
-                <!-- Zone des manches et score -->
-                <div class="row justify-content-center mb-4">
-                    <div class="col-md-4">
-                        <div class="card shadow-lg border-primary text-center">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold text-primary">Manche Actuelle</h5>
-                                <h2 id="current_stage" class="display-4">0</h2>
+                        <div class="card-body">
+                            <div class="row align-items-end">
+                                <div class="col-md-8">
+                                    <div class="form-group mb-md-0">
+                                        <label for="settings_dropdown" class="font-weight-bold mb-2">
+                                            <i class="fa fa-list"></i> Choisissez un paramètre :
+                                        </label>
+                                        <select id="settings_dropdown" class="form-control game-dropdown">
+                                            <option value="">-- Chargement des paramètres... --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column gap-2">
+                                        <button id="load_game_params" class="btn btn-outline-secondary game-btn">
+                                            <i class="fa fa-refresh"></i> Recharger
+                                        </button>
+                                        <button id="start_game_button" class="btn btn-success btn-start-game game-btn">
+                                            <i class="fa fa-play"></i> Commencer le jeu
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="trophy_celebration" class="d-none text-center">
-                        <img src="/biblical_game/static/src/img/trophy.png" alt="Trophée" style="width: 200px;" />
-                        <h1 class="text-success">🏆 Félicitations !</h1>
-                        <p>Vous avez terminé toutes les manches et remporté le trophée final !</p>
+
+                    <!-- Description du niveau -->
+                    <div class="game-card mb-4 d-none fade-in" id="stage_description_card">
+                        <div class="card-body bg-light text-center">
+                            <i class="fa fa-info-circle text-info mr-2"></i>
+                            <span id="stage_description" class="font-italic"></span>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-lg border-success text-center">
-                            <div class="card-body">
-                                <p>Points requis pour une médaille pendant cette manche</p>
-                                <ul class="no-bullets">
-                                    <li>🥉 Bronze : <span id="bronze_threshold">20</span>pts</li>
-                                    <li>🥈 Argent : <span id="silver_threshold">50</span>pts</li>
-                                    <li>🏅 Or : <span id="gold_threshold">100</span>pts</li>
-                                </ul>
+
+                    <!-- Zone des statistiques et score -->
+                    <div class="row justify-content-center mb-4 fade-in">
+                        <!-- Manche actuelle -->
+                        <div class="col-lg-2 col-md-3 col-sm-6 mb-3">
+                            <div class="card stats-card border-primary text-center">
+                                <div class="card-body">
+                                    <i class="fa fa-trophy text-primary mb-2" style="font-size: 1.5rem;"></i>
+                                    <h6 class="card-title font-weight-bold text-primary">Manche</h6>
+                                    <div id="current_stage" class="stats-value text-primary">1</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statistiques des questions -->
+                        <div class="col-lg-2 col-md-3 col-sm-6 mb-3">
+                            <div class="card stats-card border-info text-center">
+                                <div class="card-body">
+                                    <i class="fa fa-question-circle text-info mb-2" style="font-size: 1.5rem;"></i>
+                                    <h6 class="card-title font-weight-bold text-info">Questions</h6>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small class="text-muted">Total</small>
+                                            <div id="questions_answered" class="h4 mb-0 text-info">0</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Correctes</small>
+                                            <div id="correct_answers" class="h4 mb-0 text-success">0</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seuils des médailles -->
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card stats-card border-warning text-center">
+                                <div class="card-body">
+                                    <i class="fa fa-medal text-warning mb-2" style="font-size: 1.5rem;"></i>
+                                    <h6 class="card-title font-weight-bold text-warning">Seuils des Médailles</h6>
+                                    <div class="row text-sm">
+                                        <div class="col-4">
+                                            <small class="text-muted">🥉 Bronze</small>
+                                            <div class="font-weight-bold">
+                                                <span id="bronze_threshold">20</span> pts
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <small class="text-muted">🥈 Argent</small>
+                                            <div class="font-weight-bold">
+                                                <span id="silver_threshold">50</span> pts
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <small class="text-muted">🏅 Or</small>
+                                            <div class="font-weight-bold">
+                                                <span id="gold_threshold">100</span> pts
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 medal-progress">
+                                        <div id="medal_progress_bar" class="medal-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Score du joueur -->
+                        <div class="col-lg-2 col-md-3 col-sm-6 mb-3">
+                            <div class="card stats-card border-success text-center">
+                                <div class="card-body pulse-animation">
+                                    <i class="fa fa-star text-success mb-2" style="font-size: 1.5rem;"></i>
+                                    <h6 class="card-title font-weight-bold text-success">Score</h6>
+                                    <div id="player_score" class="stats-value text-success">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Médaille actuelle -->
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card stats-card border-secondary text-center">
+                                <div class="card-body">
+                                    <i class="fa fa-award text-secondary mb-2" style="font-size: 1.5rem;"></i>
+                                    <h6 class="card-title font-weight-bold">🎖️ Médaille Actuelle</h6>
+                                    <span id="current_medal" class="badge badge-medal badge-secondary">
+                                        En cours <span class="ml-1">⌛</span>
+                                    </span>
+                                    <div id="next_threshold_info" class="small text-muted mt-2">
+                                        Prochain seuil: 20 pts
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-lg border-success text-center">
+
+                    <!-- Timer Section -->
+                    <div id="timer_section" class="text-center mb-4 fade-in">
+                        <div class="game-card">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold text-success">Score</h5>
-                                <h2 id="player_score" class="display-4">0</h2>
+                                <h6 class="text-muted mb-3">
+                                    <i class="fa fa-clock"></i> Temps restant
+                                </h6>
+                                <div class="timer-display d-inline-block">
+                                    <span id="timer_count" class="timer-count">30</span>
+                                    <small class="text-muted ml-1">secondes</small>
+                                </div>
+                                <div class="progress-custom mt-3">
+                                    <div id="timer_progress" class="progress-bar-custom bg-danger" 
+                                        role="progressbar" style="width: 100%;" 
+                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="30">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Médailles -->
-                <div class="text-center mb-4">
-                    <h3>🎖️ Médailles Obtenues</h3>
-                    <span id="current_medal" class="badge badge-secondary p-3">Aucune</span>
-                </div>
+                    <!-- Section principale du jeu -->
+                    <div class="game-card mb-4 fade-in">
+                        <div class="card-header bg-gradient-primary text-white">
+                            <h5 class="card-title mb-0 text-center">
+                                <i class="fa fa-question-circle"></i> 
+                                Quelle est la référence biblique de ce verset ?
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Affichage du verset -->
+                            <div class="text-center mb-4">
+                                <div id="verse_text" class="verse-display">
+                                    <p class="mb-0 text-secondary">
+                                        <i class="fa fa-spinner fa-spin mr-2"></i>
+                                        Chargement du verset...
+                                    </p>
+                                </div>
+                            </div>
 
-                <!-- Section du compteur -->
-                <div id="timer_section" class="text-center mb-4">
-                    <h5 class="text-muted">Temps restant :</h5>
-                    <div id="timer_display" class="d-inline-block px-3 py-2 rounded bg-light shadow-sm">
-                        <span id="timer_count" class="text-danger font-weight-bold">30</span> secondes
-                    </div>
-                    <div class="progress mt-2">
-                        <div id="timer_progress" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30"></div>
-                    </div>
-                </div>
+                            <!-- Options de réponse -->
+                            <div id="response_options" class="row justify-content-center">
+                                <!-- Les boutons seront générés dynamiquement par JavaScript -->
+                            </div>
 
-                <!-- Section principale du jeu -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0 text-center">Quelle est la référence de ce verset ?</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <!-- Affichage du verset -->
-                        <blockquote id="verse_text" class="blockquote text-center mb-4">
-                            <p class="mb-0 text-secondary">Chargement du verset...</p>
-                        </blockquote>
-
-                        <!-- Options de réponse -->
-                        <div id="response_options" class="row justify-content-center">
-                            <!-- Les boutons seront générés dynamiquement -->
+                            <!-- Messages de feedback -->
+                            <div id="feedback_message" class="d-none mt-4">
+                                <!-- Contenu généré dynamiquement -->
+                            </div>
+                            
+                            <div id="correct_answer" class="d-none mt-2">
+                                <!-- Contenu généré dynamiquement -->
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Bouton Pause -->
-                <div class="mt-4" id="button_pause">
-                    <button id="pause_button" class="floating-btn" onclick="togglePause()">⏸️</button>
-                </div>
-
-                <!-- Overlay de pause -->
-                <div id="pause_overlay" class="d-none">
-                    <div class="overlay-content">
-                        <img src="/biblical_game/static/src/sounds/blue-pause.svg" alt="Pause" style="width: 200px; margin-bottom: 20px;"/>
-                        <h1>⏸️ Pause</h1>
-                        <p>Reprenez votre souffle et cliquez sur "Reprendre".</p>
-                        <button class="btn btn-primary btn-lg" onclick="togglePause()">Reprendre le jeu</button>
-                    </div>
-                </div>
-
-                <!-- Message de feedback -->
-                <div id="feedback_message" class="text-center mt-4 d-none">
-                    <h4 id="feedback_text"></h4>
-                </div>
-                <div id="correct_answer" class="text-center mt-4 d-none">
-                    <h4 id="correct_text" class="mt-2"></h4>
-                </div>
-            </div>
-        </t>
-    </template>
-    <template id="second_biblical_contest_game_main" name="Concours biblique EBNG">
-        <t t-call="website.layout">
-            <div class="container mt-5">
-                <h1 class="text-center text-primary mb-4">Jouer au Jeu Biblique</h1>
-
-                <!-- Sélecteur de paramètres -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0">Paramètres du Jeu</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="game_settings" class="font-weight-bold">Choisissez un paramètre :</label>
-                            <select id="game_settings" class="form-control">
-                                <option value="">-- Sélectionnez un paramètre --</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-secondary mt-3" onclick="loadGameSettings()">Recharger les paramètres</button>
-                    </div>
-                </div>
-
-                <!-- Zone d'affichage des versets -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="card-title mb-0">Trouver la référence du verset</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <blockquote id="verse_text" class="blockquote">
-                            <p class="mb-0 text-secondary">Appuyez sur le bouton pour afficher un verset.</p>
-                        </blockquote>
-                        <p>
-                            <label>
-                                <input type="checkbox" id="toggleParagraph" onclick="displayreference()"/> Afficher la référence
-                            </label>
-                        </p>
-                        <footer id="verse_ref" style="display:none;" class="blockquote-footer text-muted"></footer>
-                        <button class="btn btn-primary mt-3" id="play_button" onclick="fetchVerse()">
-                            <i class="fa fa-play"></i> Cliquez et Jouez
+                    <!-- Contrôles du jeu -->
+                    <div class="text-center mb-4 fade-in">
+                        <button id="pause_button" class="btn btn-pause-game game-btn">
+                            <i class="fa fa-pause"></i> Mettre en pause
                         </button>
-                        <span id="loading_spinner" class="spinner-border spinner-border-sm d-none text-primary" role="status"></span>
                     </div>
-                </div>
 
-                <!-- Compteur avec message -->
-                <div class="text-center">
-                    <p class="font-weight-bold">
-                        Temps restant : <span id="timer_count" class="text-primary">30</span> secondes
-                    </p>
-                    <p id="time_up_message" class="text-danger font-weight-bold d-none">Le temps est écoulé ! Cliquez à nouveau pour jouer.</p>
+                    <!-- Célébration du trophée -->
+                    <div id="trophy_celebration" class="trophy-celebration d-none fade-in">
+                        <div class="card border-success shadow-lg">
+                            <div class="card-body py-5">
+                                <div class="mb-3">
+                                    <i class="fa fa-trophy trophy-title" style="font-size: 5rem;"></i>
+                                </div>
+                                <h1 class="trophy-title display-3 mb-3">Félicitations !</h1>
+                                <p class="lead mb-4">
+                                    Vous avez terminé toutes les manches et remporté le trophée final ! 🎉
+                                </p>
+                                <div class="mb-3">
+                                    <div class="badge badge-lg bg-success text-white p-3">
+                                        <i class="fa fa-star mr-2"></i>
+                                        Score final : <span id="final_score">0</span> points
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-lg game-btn" onclick="location.reload()">
+                                    <i class="fa fa-refresh mr-2"></i> Rejouer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay de pause -->
+                    <div id="pause_overlay" class="pause-overlay d-none">
+                        <div class="pause-content fade-in">
+                            <h1 class="text-primary mb-4">
+                                <i class="fa fa-pause-circle"></i> Pause
+                            </h1>
+                            <p class="lead mb-4">Le jeu est actuellement en pause...</p>
+                            <p class="text-muted mb-4">
+                                <i class="fa fa-coffee mr-2"></i>
+                                Reprenez votre souffle et cliquez sur reprendre quand vous êtes prêt !
+                            </p>
+                            <button class="btn btn-success btn-lg game-btn" onclick="togglePause()">
+                                <i class="fa fa-play mr-2"></i> Reprendre le jeu
+                            </button>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Variables JavaScript pour Odoo -->
+            <script type="text/javascript">
+                // Données transmises depuis le contrôleur Odoo
+                var gameData = {
+                    csrfToken: '<t t-esc="request.csrf_token()"/>',
+                    userId: <t t-esc="request.env.user.id if request.env.user else 'null'"/>,
+                    settingsAvailable: <t t-esc="'true' if settings_available else 'false'"/>,
+                    versesAvailable: <t t-esc="'true' if verses_available else 'false'"/>,
+                    urls: {
+                        loadQuestion: '/get_question_with_setting',
+                        submitAnswer: '/submit_answer',
+                        saveScore: '/save_score',
+                        getSettings: '/get_solo_game_settings',
+                        getStageThresholds: '/get_stage_thresholds',
+                        createSession: '/create_game_session',
+                        endSession: '/end_game_session'
+                    }
+                };
+                
+                // Rendre disponible globalement
+                window.gameData = gameData;
+            </script>
+            
+            <!-- Chargement du JavaScript principal -->
+            <t t-call-assets="biblical_game.assets_frontend" t-js="true"/>
+        </t>
+    </template>
+
+    <!-- Template pour les statistiques de jeu (optionnel) -->
+    <template id="biblical_game_stats" name="Statistiques du Jeu Biblique">
+        <t t-call="website.layout">
+            <t t-set="title">Statistiques - Jeu Biblique</t>
+            
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center mb-5">📊 Vos Statistiques</h1>
+                        
+                        <div class="row">
+                            <!-- Score total -->
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fa fa-star text-warning mb-3" style="font-size: 2rem;"></i>
+                                        <h5>Score Total</h5>
+                                        <h2 class="text-warning">
+                                            <t t-esc="total_score or 0"/>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Parties jouées -->
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fa fa-gamepad text-primary mb-3" style="font-size: 2rem;"></i>
+                                        <h5>Parties Jouées</h5>
+                                        <h2 class="text-primary">
+                                            <t t-esc="games_played or 0"/>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Taux de réussite -->
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fa fa-chart-line text-success mb-3" style="font-size: 2rem;"></i>
+                                        <h5>Taux de Réussite</h5>
+                                        <h2 class="text-success">
+                                            <t t-esc="success_rate or 0"/>%
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Meilleure médaille -->
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fa fa-medal text-warning mb-3" style="font-size: 2rem;"></i>
+                                        <h5>Meilleure Médaille</h5>
+                                        <h2>
+                                            <t t-if="best_medal == 'gold'">🏅 Or</t>
+                                            <t t-elif="best_medal == 'silver'">🥈 Argent</t>
+                                            <t t-elif="best_medal == 'bronze'">🥉 Bronze</t>
+                                            <t t-else="">-</t>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Historique des parties récentes -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h3>🕒 Historique des Parties Récentes</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Score</th>
+                                                <th>Questions</th>
+                                                <th>Correctes</th>
+                                                <th>Médaille</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="recent_games" t-as="game">
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="game.create_date" 
+                                                           t-options="{'widget': 'datetime', 'format': 'dd/MM/yyyy HH:mm'}"/>
+                                                    </td>
+                                                    <td><t t-esc="game.final_score"/></td>
+                                                    <td><t t-esc="game.total_questions"/></td>
+                                                    <td><t t-esc="game.correct_answers"/></td>
+                                                    <td>
+                                                        <t t-if="game.medal == 'gold'">
+                                                            <span class="badge medal-gold">🏅 Or</span>
+                                                        </t>
+                                                        <t t-elif="game.medal == 'silver'">
+                                                            <span class="badge medal-silver">🥈 Argent</span>
+                                                        </t>
+                                                        <t t-elif="game.medal == 'bronze'">
+                                                            <span class="badge medal-bronze">🥉 Bronze</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="badge badge-secondary">-</span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-if="not recent_games">
+                                                <tr>
+                                                    <td colspan="5" class="text-center text-muted">
+                                                        Aucune partie enregistrée
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="/biblical_game" class="btn btn-primary btn-lg">
+                                <i class="fa fa-play mr-2"></i> Jouer Maintenant
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </t>
     </template>
+
+    <!-- Assets Bundle pour CSS et JS -->
+    <!-- <template id="assets_frontend" name="Biblical Game Assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/biblical_game/static/src/scss/biblical_game.scss"/>
+            <script type="text/javascript" src="/biblical_game/static/src/js/biblical_game.js"></script>
+        </xpath>
+    </template> -->
 </odoo>

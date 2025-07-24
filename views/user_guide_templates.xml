@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="menu_biblical_game" model="website.menu">
+            <field name="name">Guide utilisateur</field>
+            <field name="url">/user-guide</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">50</field>
+        </record>
+        <!-- Template principal du guide utilisateur -->
+        <template id="user_guide_template" name="Guide Utilisateur">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center mb-4">Guide Utilisateur - Jeu Biblique</h1>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <!-- Menu de navigation -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Navigation</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-unstyled">
+                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
+                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
+                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
+                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-9">
+                                        <!-- Contenu principal -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h2>Bienvenue dans le Guide Utilisateur</h2>
+                                                <p>Ce guide vous aidera à utiliser efficacement le module Jeu Biblique.</p>
+                                                
+                                                <h3>Sections disponibles :</h3>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Premiers pas</h5>
+                                                                <p class="card-text">Découvrez comment commencer à utiliser le jeu biblique.</p>
+                                                                <a href="/user-guide/getting-started" class="btn btn-primary">Commencer</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Règles du jeu</h5>
+                                                                <p class="card-text">Apprenez les règles et mécaniques du jeu.</p>
+                                                                <a href="/user-guide/game-rules" class="btn btn-primary">Voir les règles</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Configuration</h5>
+                                                                <p class="card-text">Configurez les paramètres du jeu selon vos besoins.</p>
+                                                                <a href="/user-guide/configuration" class="btn btn-primary">Configurer</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!-- Template Premiers pas -->
+        <template id="getting_started_template" name="Premiers pas">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center mb-4">Premiers pas</h1>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <!-- Menu de navigation -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Navigation</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-unstyled">
+                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
+                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0 font-weight-bold">Premiers pas</a></li>
+                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
+                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-9">
+                                        <!-- Contenu -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h2>Comment commencer</h2>
+                                                
+                                                <h3>1. Configuration initiale</h3>
+                                                <p>Avant de commencer à jouer, vous devez configurer les éléments de base :</p>
+                                                <ul>
+                                                    <li>Accédez au menu <strong>Configuration → Paramètres du Jeu</strong></li>
+                                                    <li>Définissez les paramètres généraux du jeu</li>
+                                                    <li>Configurez les niveaux de difficulté</li>
+                                                </ul>
+                                                
+                                                <h3>2. Données bibliques</h3>
+                                                <p>Assurez-vous que les données bibliques sont correctement importées :</p>
+                                                <ul>
+                                                    <li>Vérifiez la présence des livres dans <strong>Données Bibliques → Livres</strong></li>
+                                                    <li>Contrôlez les chapitres et versets associés</li>
+                                                </ul>
+                                                
+                                                <h3>3. Premier jeu</h3>
+                                                <p>Une fois la configuration terminée :</p>
+                                                <ol>
+                                                    <li>Créez une nouvelle partie depuis le menu principal</li>
+                                                    <li>Sélectionnez le niveau de difficulté</li>
+                                                    <li>Commencez à jouer !</li>
+                                                </ol>
+                                                
+                                                <div class="alert alert-info">
+                                                    <strong>Conseil :</strong> Commencez par le niveau facile pour vous familiariser avec le jeu.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!-- Template Règles du jeu -->
+        <template id="game_rules_template" name="Règles du jeu">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center mb-4">Règles du jeu</h1>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <!-- Menu de navigation -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Navigation</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-unstyled">
+                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
+                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
+                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0 font-weight-bold">Règles du jeu</a></li>
+                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0">Configuration</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-9">
+                                        <!-- Contenu -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h2>Comment jouer</h2>
+                                                
+                                                <h3>Objectif du jeu</h3>
+                                                <p>Le but est de répondre correctement aux questions bibliques pour progresser dans les niveaux.</p>
+                                                
+                                                <h3>Système de points</h3>
+                                                <ul>
+                                                    <li>Bonne réponse : +10 points</li>
+                                                    <li>Mauvaise réponse : -5 points</li>
+                                                    <li>Bonus de vitesse : +5 points si réponse en moins de 10 secondes</li>
+                                                </ul>
+                                                
+                                                <h3>Niveaux de difficulté</h3>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="card border-success mb-3">
+                                                            <div class="card-header bg-success text-white">Facile</div>
+                                                            <div class="card-body">
+                                                                <p>Questions de base sur les personnages et événements bibliques majeurs.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="card border-warning mb-3">
+                                                            <div class="card-header bg-warning">Moyen</div>
+                                                            <div class="card-body">
+                                                                <p>Questions plus détaillées nécessitant une connaissance approfondie.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="card border-danger mb-3">
+                                                            <div class="card-header bg-danger text-white">Difficile</div>
+                                                            <div class="card-body">
+                                                                <p>Questions complexes sur les détails et références croisées.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h3>Progression</h3>
+                                                <p>Pour passer au niveau suivant, vous devez :</p>
+                                                <ol>
+                                                    <li>Atteindre le score minimum requis</li>
+                                                    <li>Répondre correctement à au moins 70% des questions</li>
+                                                    <li>Terminer le niveau dans le temps imparti</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <!-- Template Configuration -->
+        <template id="configuration_template" name="Configuration">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="text-center mb-4">Configuration</h1>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <!-- Menu de navigation -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Navigation</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-unstyled">
+                                                    <li><a href="/user-guide" class="btn btn-link p-0">Accueil</a></li>
+                                                    <li><a href="/user-guide/getting-started" class="btn btn-link p-0">Premiers pas</a></li>
+                                                    <li><a href="/user-guide/game-rules" class="btn btn-link p-0">Règles du jeu</a></li>
+                                                    <li><a href="/user-guide/configuration" class="btn btn-link p-0 font-weight-bold">Configuration</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-9">
+                                        <!-- Contenu -->
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h2>Configuration du jeu</h2>
+                                                
+                                                <h3>Paramètres généraux</h3>
+                                                <p>Accédez à <strong>Configuration → Paramètres du Jeu</strong> pour modifier :</p>
+                                                <ul>
+                                                    <li>Temps limite par question</li>
+                                                    <li>Nombre de questions par niveau</li>
+                                                    <li>Score minimum pour passer au niveau suivant</li>
+                                                    <li>Activation/désactivation du bonus de vitesse</li>
+                                                </ul>
+                                                
+                                                <h3>Gestion des niveaux</h3>
+                                                <p>Dans <strong>Configuration → Niveaux de Jeu</strong>, vous pouvez :</p>
+                                                <ul>
+                                                    <li>Créer de nouveaux niveaux</li>
+                                                    <li>Modifier la difficulté</li>
+                                                    <li>Associer des types de questions spécifiques</li>
+                                                    <li>Définir les prérequis</li>
+                                                </ul>
+                                                
+                                                <h3>Données bibliques</h3>
+                                                <p>Pour enrichir le contenu du jeu :</p>
+                                                <ul>
+                                                    <li><strong>Livres</strong> : Ajoutez ou modifiez les livres bibliques</li>
+                                                    <li><strong>Chapitres</strong> : Gérez les chapitres de chaque livre</li>
+                                                    <li><strong>Versets</strong> : Importez ou saisissez manuellement les versets</li>
+                                                </ul>
+                                                
+                                                <h3>Conseils de configuration</h3>
+                                                <div class="alert alert-info">
+                                                    <h5>Bonnes pratiques :</h5>
+                                                    <ul class="mb-0">
+                                                        <li>Testez toujours après une modification</li>
+                                                        <li>Sauvegardez vos paramètres avant de faire des changements majeurs</li>
+                                                        <li>Adaptez la difficulté à votre public cible</li>
+                                                        <li>Vérifiez régulièrement la qualité des données bibliques</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+        
+    </data>
+</odoo>

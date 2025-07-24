@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Vue liste des sessions -->
+        <record id="view_biblical_game_session_tree" model="ir.ui.view">
+            <field name="name">biblical.game.session.tree</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state=='completed'" decoration-muted="state=='abandoned'" decoration-info="state=='in_progress'">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="start_time"/>
+                    <field name="duration" widget="float_time"/>
+                    <field name="score"/>
+                    <field name="stage_level"/>
+                    <field name="accuracy" widget="percentage"/>
+                    <field name="medal_earned" widget="badge" decoration-warning="medal_earned=='bronze'" decoration-info="medal_earned=='silver'" decoration-success="medal_earned=='gold'"/>
+                    <field name="state" widget="badge" decoration-success="state=='completed'" decoration-muted="state=='abandoned'" decoration-info="state=='in_progress'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue formulaire des sessions -->
+        <record id="view_biblical_game_session_form" model="ir.ui.view">
+            <field name="name">biblical.game.session.form</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <form string="Session de Jeu">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="in_progress,completed,abandoned"/>
+                        <button name="end_session" string="Terminer la session" type="object" class="btn-primary" 
+                                invisible="state != 'in_progress'"/>
+                        <button name="abandon_session" string="Abandonner" type="object" class="btn-secondary" 
+                                invisible="state != 'in_progress'"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_view_details" icon="fa-bar-chart">
+                                <field string="Statistiques" name="accuracy" widget="statinfo"/>
+                            </button>
+                        </div>
+                        
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Nom de la session"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group name="session_info">
+                                <field name="user_id" options="{'no_create': True}"/>
+                                <field name="start_time"/>
+                                <field name="end_time" readonly="state == 'in_progress'"/>
+                                <field name="duration" widget="float_time"/>
+                            </group>
+                            
+                            <group name="game_stats">
+                                <field name="score"/>
+                                <field name="stage_level"/>
+                                <field name="questions_answered"/>
+                                <field name="correct_answers"/>
+                                <field name="accuracy" widget="percentage"/>
+                                <field name="medal_earned" widget="badge" 
+                                       decoration-warning="medal_earned=='bronze'" 
+                                       decoration-info="medal_earned=='silver'" 
+                                       decoration-success="medal_earned=='gold'"
+                                       invisible="not medal_earned"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Détails de la session" name="session_details">
+                                <group>
+                                    <group string="Performance">
+                                        <field name="score" readonly="1"/>
+                                        <field name="stage_level" readonly="1"/>
+                                        <field name="accuracy" widget="percentage" readonly="1"/>
+                                    </group>
+                                    <group string="Temps">
+                                        <field name="start_time" readonly="1"/>
+                                        <field name="end_time" readonly="1"/>
+                                        <field name="duration" widget="float_time" readonly="1"/>
+                                    </group>
+                                </group>
+
+                                <div class="mt16" invisible="state != 'completed'">
+                                    <h3>Résumé de la session</h3>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="card bg-primary text-white">
+                                                <div class="card-body text-center">
+                                                    <h4><field name="score" readonly="1"/></h4>
+                                                    <p>Score Final</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card bg-success text-white">
+                                                <div class="card-body text-center">
+                                                    <h4><field name="stage_level" readonly="1"/></h4>
+                                                    <p>Niveau Atteint</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card bg-info text-white">
+                                                <div class="card-body text-center">
+                                                    <h4><field name="accuracy" widget="percentage" readonly="1"/></h4>
+                                                    <p>Précision</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card bg-warning text-white">
+                                                <div class="card-body text-center">
+                                                    <h4><field name="duration" widget="float_time" readonly="1"/></h4>
+                                                    <p>Durée</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue recherche -->
+        <record id="view_biblical_game_session_search" model="ir.ui.view">
+            <field name="name">biblical.game.session.search</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Session" filter_domain="[('name', 'ilike', self)]"/>
+                    <field name="user_id" string="Utilisateur"/>
+                    <field name="state"/>
+                    
+                    <filter string="En cours" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                    <filter string="Terminées" name="completed" domain="[('state', '=', 'completed')]"/>
+                    <filter string="Abandonnées" name="abandoned" domain="[('state', '=', 'abandoned')]"/>
+                    
+                    <separator/>
+                    <filter string="Mes sessions" name="my_sessions" domain="[('user_id', '=', uid)]"/>
+                    <filter string="Aujourd'hui" name="today" domain="[('start_time', '&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter string="Cette semaine" name="this_week" domain="[('start_time', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    
+                    <separator/>
+                    <filter string="Médaille d'or" name="gold_medal" domain="[('medal_earned', '=', 'gold')]"/>
+                    <filter string="Médaille d'argent" name="silver_medal" domain="[('medal_earned', '=', 'silver')]"/>
+                    <filter string="Médaille de bronze" name="bronze_medal" domain="[('medal_earned', '=', 'bronze')]"/>
+                    
+                    <group expand="0" string="Grouper par">
+                        <filter string="Utilisateur" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                        <filter string="Statut" name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter string="Médaille" name="group_by_medal" context="{'group_by': 'medal_earned'}"/>
+                        <filter string="Date" name="group_by_date" context="{'group_by': 'start_time:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vue kanban -->
+        <record id="view_biblical_game_session_kanban" model="ir.ui.view">
+            <field name="name">biblical.game.session.kanban</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="start_time"/>
+                    <field name="score"/>
+                    <field name="stage_level"/>
+                    <field name="accuracy"/>
+                    <field name="duration"/>
+                    <field name="medal_earned"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+                                        </div>
+                                        <div class="o_kanban_record_top_right">
+                                            <field name="medal_earned" widget="badge" 
+                                                   decoration-warning="medal_earned=='bronze'" 
+                                                   decoration-info="medal_earned=='silver'" 
+                                                   decoration-success="medal_earned=='gold'"
+                                                   invisible="not medal_earned"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <div class="o_kanban_record_subtitle">
+                                            <i class="fa fa-user"/> <field name="user_id"/>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle">
+                                            <i class="fa fa-calendar"/> <field name="start_time" widget="date"/>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle">
+                                            <i class="fa fa-trophy"/> Score: <field name="score"/>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle">
+                                            <i class="fa fa-level-up"/> Niveau: <field name="stage_level"/>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle">
+                                            <i class="fa fa-percent"/> Précision: <field name="accuracy" widget="percentage"/>
+                                        </div>
+                                        <div class="o_kanban_record_subtitle" invisible="not duration">
+                                            <i class="fa fa-clock-o"/> Durée: <field name="duration" widget="float_time"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Vue pivot pour les statistiques -->
+        <record id="view_biblical_game_session_pivot" model="ir.ui.view">
+            <field name="name">biblical.game.session.pivot</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <pivot string="Statistiques des Sessions">
+                    <field name="user_id" type="row"/>
+                    <field name="state" type="col"/>
+                    <field name="score" type="measure"/>
+                    <field name="accuracy" type="measure"/>
+                    <field name="duration" type="measure"/>
+                    <field name="stage_level" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Vue graphique -->
+        <record id="view_biblical_game_session_graph" model="ir.ui.view">
+            <field name="name">biblical.game.session.graph</field>
+            <field name="model">biblical.game.session</field>
+            <field name="arch" type="xml">
+                <graph string="Évolution des Scores" type="line">
+                    <field name="start_time" type="row" interval="day"/>
+                    <field name="score" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Action pour les sessions -->
+        <record id="action_biblical_game_session" model="ir.actions.act_window">
+            <field name="name">Sessions de Jeu</field>
+            <field name="res_model">biblical.game.session</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph</field>
+            <field name="context">{'search_default_my_sessions': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première session de jeu !
+                </p>
+                <p>
+                    Les sessions de jeu vous permettent de suivre vos performances,
+                    vos scores et votre progression dans le jeu biblique.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action pour les sessions actives -->
+        <record id="action_biblical_game_session_active" model="ir.actions.act_window">
+            <field name="name">Sessions Actives</field>
+            <field name="res_model">biblical.game.session</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('state', '=', 'in_progress')]</field>
+            <field name="context">{'search_default_in_progress': 1}</field>
+        </record>
+
+        <!-- Action pour les statistiques -->
+        <record id="action_biblical_game_session_stats" model="ir.actions.act_window">
+            <field name="name">Statistiques des Sessions</field>
+            <field name="res_model">biblical.game.session</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="context">{'search_default_completed': 1}</field>
+        </record>
+
+    </data>
+</odoo>
