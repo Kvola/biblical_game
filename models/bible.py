@@ -85,6 +85,21 @@ class BiblicalGameSettings(models.Model):
         """Retourne le nombre de livres sélectionnés"""
         return len(self.book_ids)
 
+    @api.model
+    def setup_book_associations(self):
+        """Associe automatiquement les livres aux configurations"""
+        # Nouveau Testament (livres 40-66)
+        nt_books = self.env['biblical.game.book'].search([('book_number', '>=', 40)])
+        nt_settings = self.env.ref('biblical_game.new_testament_settings')
+        nt_settings.book_ids = nt_books
+        
+        # Ancien Testament (livres 1-39)
+        ot_books = self.env['biblical.game.book'].search([('book_number', '<=', 39)])
+        ot_settings = self.env.ref('biblical_game.old_testament_settings')
+        ot_settings.book_ids = ot_books
+        
+        # Etc...
+
 # biblical_game_book.py
 class BibleBook(models.Model):
     _name = 'biblical.game.book'

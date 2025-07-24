@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "views/bible_views.xml",
         "views/bible_settings_views.xml",
+        "data/biblical_game_settings_data.xml",
         'views/biblical_game_stage_views.xml',
         "views/templates.xml",
         "views/user_guide_templates.xml",
