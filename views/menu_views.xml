@@ -14,7 +14,6 @@
         <menuitem id="menu_biblical_game_configuration" name="Configuration" parent="menu_biblical_game_root" sequence="10"/>
             <menuitem id="menu_biblical_game_settings" name="Paramètres du Jeu" parent="menu_biblical_game_configuration" sequence="10" action="action_biblical_game_settings"/>
             <menuitem id="menu_biblical_game_stages" name="Niveaux de Jeu" parent="menu_biblical_game_configuration" sequence="20" action="action_biblical_game_stage"/>
-            <menuitem id="menu_configuration_guide" name="Guide Utilisateur" parent="menu_biblical_game_configuration" action="action_open_user_guide" sequence="100"/>
 
         <!-- Sous-menu Sessions de Jeu -->
         <menuitem id="menu_biblical_game_sessions" name="Sessions de Jeu" parent="menu_biblical_game_root" sequence="30"/>

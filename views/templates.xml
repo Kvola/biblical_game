@@ -433,12 +433,4 @@
             </div>
         </t>
     </template>
-
-    <!-- Assets Bundle pour CSS et JS -->
-    <!-- <template id="assets_frontend" name="Biblical Game Assets" inherit_id="web.assets_frontend">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/scss" href="/biblical_game/static/src/scss/biblical_game.scss"/>
-            <script type="text/javascript" src="/biblical_game/static/src/js/biblical_game.js"></script>
-        </xpath>
-    </template> -->
 </odoo>

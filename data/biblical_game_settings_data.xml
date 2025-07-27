@@ -3,14 +3,13 @@
     <data noupdate="1">
         
         <!-- Configuration par défaut - Bible complète -->
-        <record id="complete_bible_settings" model="biblical.game.settings">
+        <record id="full_bible_settings" model="biblical.game.settings">
             <field name="name">Bible Complète</field>
             <field name="timer_duration">30</field>
             <field name="max_questions_per_game">10</field>
             <field name="difficulty_level">medium</field>
             <field name="allow_hints" eval="True"/>
             <field name="active" eval="True"/>
-            <!-- book_ids sera renseigné dynamiquement ou manuellement -->
         </record>
 
         <!-- Configuration Nouveau Testament -->
@@ -33,6 +32,16 @@
             <field name="active" eval="False"/>
         </record>
 
+        <!-- Configuration Pentateuque -->
+        <record id="pentateuch_settings" model="biblical.game.settings">
+            <field name="name">Pentateuque (Torah)</field>
+            <field name="timer_duration">35</field>
+            <field name="max_questions_per_game">12</field>
+            <field name="difficulty_level">hard</field>
+            <field name="allow_hints" eval="True"/>
+            <field name="active" eval="False"/>
+        </record>
+
         <!-- Configuration Évangiles -->
         <record id="gospels_settings" model="biblical.game.settings">
             <field name="name">Les Quatre Évangiles</field>
@@ -44,8 +53,8 @@
         </record>
 
         <!-- Configuration Épîtres Pauliniennes -->
-        <record id="paul_epistles_settings" model="biblical.game.settings">
-            <field name="name">Épîtres de Paul</field>
+        <record id="pauline_epistles_settings" model="biblical.game.settings">
+            <field name="name">Épîtres Pauliniennes</field>
             <field name="timer_duration">30</field>
             <field name="max_questions_per_game">10</field>
             <field name="difficulty_level">medium</field>
@@ -53,30 +62,40 @@
             <field name="active" eval="False"/>
         </record>
 
-        <!-- Configuration Livres Poétiques -->
-        <record id="poetic_books_settings" model="biblical.game.settings">
-            <field name="name">Livres Poétiques</field>
+        <!-- Configuration Livres Historiques AT -->
+        <record id="old_testament_historical_settings" model="biblical.game.settings">
+            <field name="name">Livres Historiques (AT)</field>
             <field name="timer_duration">35</field>
+            <field name="max_questions_per_game">10</field>
+            <field name="difficulty_level">medium</field>
+            <field name="allow_hints" eval="True"/>
+            <field name="active" eval="False"/>
+        </record>
+
+        <!-- Configuration Livres Poétiques -->
+        <record id="old_testament_poetic_settings" model="biblical.game.settings">
+            <field name="name">Livres Poétiques (AT)</field>
+            <field name="timer_duration">30</field>
             <field name="max_questions_per_game">8</field>
             <field name="difficulty_level">medium</field>
             <field name="allow_hints" eval="True"/>
             <field name="active" eval="False"/>
         </record>
 
-        <!-- Configuration Pentateuque -->
-        <record id="pentateuch_settings" model="biblical.game.settings">
-            <field name="name">Pentateuque (Torah)</field>
-            <field name="timer_duration">35</field>
-            <field name="max_questions_per_game">12</field>
+        <!-- Configuration Prophètes Majeurs -->
+        <record id="major_prophets_settings" model="biblical.game.settings">
+            <field name="name">Prophètes Majeurs</field>
+            <field name="timer_duration">40</field>
+            <field name="max_questions_per_game">10</field>
             <field name="difficulty_level">hard</field>
-            <field name="allow_hints" eval="True"/>
+            <field name="allow_hints" eval="False"/>
             <field name="active" eval="False"/>
         </record>
 
-        <!-- Configuration Prophètes -->
-        <record id="prophets_settings" model="biblical.game.settings">
-            <field name="name">Livres Prophétiques</field>
-            <field name="timer_duration">40</field>
+        <!-- Configuration Prophètes Mineurs -->
+        <record id="minor_prophets_settings" model="biblical.game.settings">
+            <field name="name">Prophètes Mineurs</field>
+            <field name="timer_duration">35</field>
             <field name="max_questions_per_game">12</field>
             <field name="difficulty_level">hard</field>
             <field name="allow_hints" eval="False"/>
@@ -141,7 +160,7 @@
     </data>
 
     <!-- Fonction Python pour associer les livres après création -->
-    <data noupdate="1">
+    <!-- <data noupdate="1">
         <function model="biblical.game.settings" name="setup_book_associations"/>
-    </data>
+    </data> -->
 </odoo>

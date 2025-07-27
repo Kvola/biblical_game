@@ -1632,6 +1632,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 /**
+/**
  * Gestion de la perte de focus/reprise de focus
  */
 document.addEventListener('visibilitychange', () => {
